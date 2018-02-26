@@ -1,0 +1,15 @@
+# rewrite engine
+RewriteEngine on
+
+#RewriteRule ^login login.php
+
+#RewriteRule ^admin admin/admin_home.php
+
+#RewriteRule ^medicine medicine/medicine_home.php
+
+#RewriteRule ^composition composition/comp_home.php
+
+#RewriteRule ^category category/cat_home.php
+#RewriteRule ^user user/user_home.php
+
+RewriteRule ^test test.php
