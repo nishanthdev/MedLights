@@ -1,4 +1,8 @@
+<?php 
 
+include '../database/DB.php';
+include '';
+ ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
