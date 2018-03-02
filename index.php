@@ -1,573 +1,823 @@
-<?php
+<?php 
 
-// include './assets/header.php';
-session_start();
-if(!isset($_SESSION["state"]))
-{
-  header('Location:login.php');
-} else {
-  // echo "logged in";
-}
 include './database/DB.php';
-// include './assets/navbar.php';
 
-?>
+ ?>
 
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Index</title>
-</head>
-<body>
- <div class="header">
-  <div class="container">
-  <h1 class="display-4 text-center">Home Page</h1>
-  </div>
-</div>
- --><?php include './search_med.php'; ?>
-
-<!-- </body>
-<style media="screen">
-  .header {
-    background: #89C4F4;
-    color: white;
-    padding: 10px;
-  }
-</style>
-</html> -->
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>OGP</title>
-    <!-- Bootstrap core CSS -->
-    <link href="assets/css/bootstrap.css" rel="stylesheet">
-    <!-- Fontawesome core CSS -->
-    <link href="assets/css/font-awesome.min.css" rel="stylesheet" />
-    <!--GOOGLE FONT -->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <!--Slide Show Css -->
-    <link href="assets/ItemSlider/css/main-style.css" rel="stylesheet" />
-    <!-- custom CSS here -->
-    <link href="assets/css/style.css" rel="stylesheet" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>MedLights</title>
+
+<!-- Bootstrap Core CSS -->
+<link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+<!-- Customizable CSS -->
+<link rel="stylesheet" href="assets/css/main.css">
+<link rel="stylesheet" href="assets/css/blue.css">
+<link rel="stylesheet" href="assets/css/owl.carousel.css">
+<link rel="stylesheet" href="assets/css/owl.transitions.css">
+<link rel="stylesheet" href="assets/css/animate.min.css">
+<link rel="stylesheet" href="assets/css/rateit.css">
+<link rel="stylesheet" href="assets/css/bootstrap-select.min.css">
+
+<!-- Icons/Glyphs -->
+<link rel="stylesheet" href="assets/css/font-awesome.css">
+
+<!-- Fonts -->
+<link href='http://fonts.googleapis.com/css?family=Roboto:300,400,500,700' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,600italic,700,700italic,800' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 </head>
-<body>
-    <nav class="navbar navbar-default" role="navigation">
-        <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#"><strong>OGP</strong> Shop</a>
-            </div>
+<body class="cnt-home">
+<?php include "./head.php"; ?>
+<!-- ============================================== HEADER ============================================== -->
+<div class="body-content outer-top-xs" id="top-banner-and-menu">
+  <div class="container">
+    <div class="row"> 
+      <!-- ============================================== SIDEBAR ============================================== -->
+      <div class="col-xs-12 col-sm-12 col-md-3 sidebar"> 
+        
+        <!-- ================================== TOP NAVIGATION ================================== -->
+        <div class="side-menu animate-dropdown outer-bottom-xs">
+          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
+          <nav class="yamm megamenu-horizontal">
+            <ul class="nav">
+              <?php 
+              $sql = "SELECT * from category";
+              $result = $link->query($sql);
+              while ($row = mysqli_fetch_assoc($result)) {
+  
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">Track Order</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Signup</a></li>
-
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">24x7 Support <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><strong>Call: </strong>+09-456-567-890</a></li>
-                            <li><a href="#"><strong>Mail: </strong>info@yourdomain.com</a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><strong>Address: </strong>
-                                <div>
-                                    234, New york Street,<br />
-                                    Just Location, USA
-                                </div>
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="form-group">
-                        <input type="text" placeholder="Enter Keyword Here ..." class="form-control">
-                    </div>
-                    &nbsp; 
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </form>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container-fluid -->
-    </nav>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-9">
-                <div class="well well-lg offer-box text-center">
-
-
-                   Today's Offer : &nbsp; <span class="glyphicon glyphicon-cog"></span>&nbsp;40 % off  on purchase of $ 2,000 and above till 24 dec !                
+               ?>
+              <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php echo $row['cat_name']; ?></a></li>
+              <?php } ?>  
               
-               
-                </div>
-                <div class="main box-border">
-                    <div id="mi-slider" class="mi-slider">
-                        <ul>
+            </ul>
+            <!-- /.nav --> 
+          </nav>
+          <!-- /.megamenu-horizontal --> 
+        </div>
+        <!-- /.side-menu --> 
+        <!-- ============================================== SPECIAL OFFER ============================================== -->
+        
+        <!-- ============================================== Testimonials============================================== -->
 
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/1.jpg" alt="img01"><h4>Boots</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/2.jpg" alt="img02"><h4>Oxfords</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/3.jpg" alt="img03"><h4>Loafers</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/4.jpg" alt="img04"><h4>Sneakers</h4>
-                            </a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/5.jpg" alt="img05"><h4>Belts</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/6.jpg" alt="img06"><h4>Hats &amp; Caps</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/7.jpg" alt="img07"><h4>Sunglasses</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/8.jpg" alt="img08"><h4>Scarves</h4>
-                            </a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/9.jpg" alt="img09"><h4>Casual</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/10.jpg" alt="img10"><h4>Luxury</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/11.jpg" alt="img11"><h4>Sport</h4>
-                            </a></li>
-                        </ul>
-                        <ul>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/12.jpg" alt="img12"><h4>Carry-Ons</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/13.jpg" alt="img13"><h4>Duffel Bags</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/14.jpg" alt="img14"><h4>Laptop Bags</h4>
-                            </a></li>
-                            <li><a href="#">
-                                <img src="assets/ItemSlider/images/15.jpg" alt="img15"><h4>Briefcases</h4>
-                            </a></li>
-                        </ul>
-                        <nav>
-                            <a href="#">Shoes</a>
-                            <a href="#">Accessories</a>
-                            <a href="#">Watches</a>
-                            <a href="#">Bags</a>
-                        </nav>
-                    </div>
-                    
+        
+        <!-- ============================================== Testimonials: END ============================================== -->
+        
+        <!-- <div class="home-banner"> <img src="assets/images/banners/LHS-banner.jpg" alt="Image"> </div> -->
+      </div>
+      <!-- /.sidemenu-holder --> 
+      <!-- ============================================== SIDEBAR : END ============================================== --> 
+      
+      <!-- ============================================== CONTENT ============================================== -->
+      <div class="col-xs-12 col-sm-12 col-md-9 homebanner-holder"> 
+        <!-- ========================================== SECTION – HERO ========================================= -->
+        
+        <div id="hero">
+          <div id="owl-main" class="owl-carousel owl-inner-nav owl-ui-sm">
+            <div class="item" style="background-image: url(assets/images/sliders/01.jpg);">
+              <div class="container-fluid">
+                <div class="caption bg-color vertical-center text-left">
+                  <div class="slider-header fadeInDown-1">Top Brands</div>
+                  <div class="big-text fadeInDown-1"> New Collections </div>
+                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
+                  <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                 </div>
-                <br />
+                <!-- /.caption --> 
+              </div>
+              <!-- /.container-fluid --> 
             </div>
-            <!-- /.col -->
+            <!-- /.item -->
             
-            <div class="col-md-3 text-center">
-                <div class=" col-md-12 col-sm-6 col-xs-6" >
-                    <div class="offer-text">
-                        30% off here
-                    </div>
-                    <div class="thumbnail product-box">
-                        <img src="assets/img/dummyimg.png" alt="" />
-                        <div class="caption">
-                            <h3><a href="#">Samsung Galaxy </a></h3>
-                            <p><a href="#">Ptional dismiss button </a></p>
-                        </div>
-                    </div>
+            <div class="item" style="background-image: url(assets/images/sliders/02.jpg);">
+              <div class="container-fluid">
+                <div class="caption bg-color vertical-center text-left">
+                  <div class="slider-header fadeInDown-1">Spring 2016</div>
+                  <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span> </div>
+                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
+                  <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                 </div>
-                <div class=" col-md-12 col-sm-6 col-xs-6">
-                    <div class="offer-text2">
-                        30% off here
-                    </div>
-                    <div class="thumbnail product-box">
-                        <img src="assets/img/dummyimg.png" alt="" />
-                        <div class="caption">
-                            <h3><a href="#">Samsung Galaxy </a></h3>
-                            <p><a href="#">Ptional dismiss button </a></p>
-                        </div>
-                    </div>
-                </div>
+                <!-- /.caption --> 
+              </div>
+              <!-- /.container-fluid --> 
             </div>
-            <!-- /.col -->
+            <!-- /.item --> 
+            
+          </div>
+          <!-- /.owl-carousel --> 
         </div>
-        <!-- /.row -->
-        <div class="row">
-            <div class="col-md-3">
-                <div>
-                    <a href="#" class="list-group-item active">Electronics
-                    </a>
-                    <ul class="list-group">
-
-                        <li class="list-group-item">Mobile
-      <span class="label label-primary pull-right">234</span>
-                        </li>
-                        <li class="list-group-item">Computers
-                      <span class="label label-success pull-right">34</span>
-                        </li>
-                        <li class="list-group-item">Tablets
-                         <span class="label label-danger pull-right">4</span>
-                        </li>
-                        <li class="list-group-item">Appliances
-                             <span class="label label-info pull-right">434</span>
-                        </li>
-                        <li class="list-group-item">Games & Entertainment
-                             <span class="label label-success pull-right">34</span>
-                        </li>
-                    </ul>
+        
+        <!-- ========================================= SECTION – HERO : END ========================================= --> 
+        
+        <!-- ============================================== INFO BOXES ============================================== -->
+        <div class="info-boxes wow fadeInUp">
+          <div class="info-boxes-inner">
+            <div class="row">
+              <div class="col-md-6 col-sm-4 col-lg-4">
+                <div class="info-box">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h4 class="info-box-heading green">money back</h4>
+                    </div>
+                  </div>
+                  <h6 class="text">30 Days Money Back Guarantee</h6>
                 </div>
-                <!-- /.div -->
-                <div>
-                    <a href="#" class="list-group-item active list-group-item-success">Clothing & Wears
-                    </a>
-                    <ul class="list-group">
-
-                        <li class="list-group-item">Men's Clothing
-                             <span class="label label-danger pull-right">300</span>
-                        </li>
-                        <li class="list-group-item">Women's Clothing
-                             <span class="label label-success pull-right">340</span>
-                        </li>
-                        <li class="list-group-item">Kid's Wear
-                             <span class="label label-info pull-right">735</span>
-                        </li>
-
-                    </ul>
-                </div>
-                <!-- /.div -->
-                <div>
-                    <a href="#" class="list-group-item active">Accessaries & Extras
-                    </a>
-                    <ul class="list-group">
-                        <li class="list-group-item">Mobile Accessaries
-                             <span class="label label-warning pull-right">456</span>
-                        </li>
-                        <li class="list-group-item">Men's Accessaries
-                             <span class="label label-success pull-right">156</span>
-                        </li>
-                        <li class="list-group-item">Women's Accessaries
-                             <span class="label label-info pull-right">400</span>
-                        </li>
-                        <li class="list-group-item">Kid's Accessaries
-                             <span class="label label-primary pull-right">89</span>
-                        </li>
-                        <li class="list-group-item">Home Products
-                             <span class="label label-danger pull-right">90</span>
-                        </li>
-                        <li class="list-group-item">Kitchen Products
-                             <span class="label label-warning pull-right">567</span>
-                        </li>
-                    </ul>
-                </div>
-                <!-- /.div -->
-                <div>
-                    <ul class="list-group">
-                        <li class="list-group-item list-group-item-success"><a href="#">New Offer's Coming </a></li>
-                        <li class="list-group-item list-group-item-info"><a href="#">New Products Added</a></li>
-                        <li class="list-group-item list-group-item-warning"><a href="#">Ending Soon Offers</a></li>
-                        <li class="list-group-item list-group-item-danger"><a href="#">Just Ended Offers</a></li>
-                    </ul>
-                </div>
-                <!-- /.div -->
-                <div class="well well-lg offer-box offer-colors">
-
-
-                    <span class="glyphicon glyphicon-star-empty"></span>25 % off  , GRAB IT                 
+              </div>
+              <!-- .col -->
               
-                   <br />
-                    <br />
-                    <div class="progress progress-striped">
-                        <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"
-                            style="width: 70%">
-                            <span class="sr-only">70% Complete (success)</span>
-                            2hr 35 mins left
-                        </div>
+              <div class="hidden-md col-sm-4 col-lg-4">
+                <div class="info-box">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h4 class="info-box-heading green">free shipping</h4>
                     </div>
-                    <a href="#">click here to know more </a>
+                  </div>
+                  <h6 class="text">Shipping on orders over $99</h6>
                 </div>
-                <!-- /.div -->
+              </div>
+              <!-- .col -->
+              
+              <div class="col-md-6 col-sm-4 col-lg-4">
+                <div class="info-box">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <h4 class="info-box-heading green">Special Sale</h4>
+                    </div>
+                  </div>
+                  <h6 class="text">Extra $5 off on all items </h6>
+                </div>
+              </div>
+              <!-- .col --> 
             </div>
-            <!-- /.col -->
-            <div class="col-md-9">
-                <div>
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li class="active">Electronics</li>
-                    </ol>
-                </div>
-                <!-- /.div -->
-                <div class="row">
-                    <div class="btn-group alg-right-pad">
-                        <button type="button" class="btn btn-default"><strong>1235  </strong>items</button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
-                                Sort Products &nbsp;
-      <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">By Price Low</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Price High</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Popularity</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Reviews</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Samsung Galaxy </a></h3>
-                                <p>Price : <strong>$ 3,45,900</strong>  </p>
-                                <p><a href="#">Ptional dismiss button </a></p>
-                                <p>Ptional dismiss button in tional dismiss button in   </p>
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Samsung Galaxy </a></h3>
-                                <p>Price : <strong>$ 3,45,900</strong>  </p>
-                                <p><a href="#">Ptional dismiss button </a></p>
-                                <p>Ptional dismiss button in tional dismiss button in   </p>
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Samsung Galaxy </a></h3>
-                                <p>Price : <strong>$ 3,45,900</strong>  </p>
-                                <p><a href="#">Ptional dismiss button </a></p>
-                                <p>Ptional dismiss button in tional dismiss button in   </p>
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <ul class="pagination alg-right-pad">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
-                <!-- /.row -->
-                <div>
-                    <ol class="breadcrumb">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Clothing</a></li>
-                        <li class="active">Men's Clothing</li>
-                    </ol>
-                </div>
-                <!-- /.div -->
-                <div class="row">
-                    <div class="btn-group alg-right-pad">
-                        <button type="button" class="btn btn-default"><strong>3005  </strong>items</button>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                Sort Products &nbsp;
-      <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">By Price Low</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Price High</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Popularity</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">By Reviews</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Samsung Galaxy </a></h3>
-                                <p>Price : <strong>$ 3,45,900</strong>  </p>
-                                <p><a href="#">Ptional dismiss button </a></p>
-                                <p>Ptional dismiss button in tional dismiss button in   </p>
-                                <p>
-                                    <a href="#" class="btn btn-success" role="button">Add To Cart</a>
-                                    <a href="#" class="btn btn-primary" role="button">See Details</a>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Samsung Galaxy </a></h3>
-                                <p>Price : <strong>$ 3,45,900</strong>  </p>
-                                <p><a href="#">Ptional dismiss button </a></p>
-                                <p>Ptional dismiss button in tional dismiss button in   </p>
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                    <div class="col-md-4 text-center col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
-                            <img src="assets/img/dummyimg.png" alt="" />
-                            <div class="caption">
-                                <h3><a href="#">Samsung Galaxy </a></h3>
-                                <p>Price : <strong>$ 3,45,900</strong>  </p>
-                                <p><a href="#">Ptional dismiss button </a></p>
-                                <p>Ptional dismiss button in tional dismiss button in   </p>
-                                <p><a href="#" class="btn btn-success" role="button">Add To Cart</a> <a href="#" class="btn btn-primary" role="button">See Details</a></p>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.col -->
-                </div>
-                <!-- /.row -->
-                <div class="row">
-                    <ul class="pagination alg-right-pad">
-                        <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">&raquo;</a></li>
-                    </ul>
-                </div>
-                <!-- /.row -->
-            </div>
-            <!-- /.col -->
+            <!-- /.row --> 
+          </div>
+          <!-- /.info-boxes-inner --> 
+          
         </div>
-        <!-- /.row -->
-    </div>
-    <!-- /.container -->
-    <div class="col-md-12 download-app-box text-center">
-
-        <span class="glyphicon glyphicon-download-alt"></span>Download Our Android App and Get 10% additional Off on all Products . <a href="#" class="btn btn-danger btn-lg">DOWNLOAD  NOW</a>
-
-    </div>
-
-    <!--Footer -->
-    <div class="col-md-12 footer-box">
-        <div class="row">
-            <div class="col-md-4">
-                <strong>Send a Quick Query </strong>
-                <hr>
-                <form>
-                    <div class="row">
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" required="required" placeholder="Name">
-                            </div>
+        <!-- /.info-boxes --> 
+        <!-- ============================================== INFO BOXES : END ============================================== --> 
+       
+         
+     
+        <!-- ============================================== BEST SELLER ============================================== -->
+        
+        <div class="best-deal wow fadeInUp outer-bottom-xs">
+          <h3 class="section-title">Best seller</h3>
+          <div class="sidebar-widget-body outer-top-xs">
+            <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
+              <div class="item">
+                <div class="products best-product">
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p20.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
                         </div>
-                        <div class="col-md-6 col-sm-6">
-                            <div class="form-group">
-                                <input type="text" class="form-control" required="required" placeholder="Email address">
-                            </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
                         </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
                     </div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12">
-                            <div class="form-group">
-                                <textarea name="message" id="message" required="required" class="form-control" rows="3" placeholder="Message"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit Request</button>
-                            </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p21.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
                         </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
                     </div>
-                </form>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="products best-product">
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p22.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
+                        </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
+                    </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p23.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
+                        </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
+                    </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="products best-product">
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p24.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
+                        </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
+                    </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p25.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
+                        </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
+                    </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="products best-product">
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p26.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
+                        </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
+                    </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                  <div class="product">
+                    <div class="product-micro">
+                      <div class="row product-micro-row">
+                        <div class="col col-xs-5">
+                          <div class="product-image">
+                            <div class="image"> <a href="#"> <img src="assets/images/products/p27.jpg" alt=""> </a> </div>
+                            <!-- /.image --> 
+                            
+                          </div>
+                          <!-- /.product-image --> 
+                        </div>
+                        <!-- /.col -->
+                        <div class="col2 col-xs-7">
+                          <div class="product-info">
+                            <h3 class="name"><a href="#">Floral Print Buttoned</a></h3>
+                            <div class="rating rateit-small"></div>
+                            <div class="product-price"> <span class="price"> $450.99 </span> </div>
+                            <!-- /.product-price --> 
+                            
+                          </div>
+                        </div>
+                        <!-- /.col --> 
+                      </div>
+                      <!-- /.product-micro-row --> 
+                    </div>
+                    <!-- /.product-micro --> 
+                    
+                  </div>
+                </div>
+              </div>
             </div>
-
-            <div class="col-md-4">
-                <strong>Our Location</strong>
-                <hr>
-                <p>
-                     234, New york Street,<br />
-                                    Just Location, USA<br />
-                    Call: +09-456-567-890<br>
-                    Email: info@yourdomain.com<br>
-                </p>
-
-                2014 www.yourdomain.com | All Right Reserved
-            </div>
-            <div class="col-md-4 social-box">
-                <strong>We are Social </strong>
-                <hr>
-                <a href="#"><i class="fa fa-facebook-square fa-3x "></i></a>
-                <a href="#"><i class="fa fa-twitter-square fa-3x "></i></a>
-                <a href="#"><i class="fa fa-google-plus-square fa-3x c"></i></a>
-                <a href="#"><i class="fa fa-linkedin-square fa-3x "></i></a>
-                <a href="#"><i class="fa fa-pinterest-square fa-3x "></i></a>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere. Curabitur nec nisl odio. Mauris vehicula at nunc id posuere. 
-                </p>
-            </div>
+          </div>
+          <!-- /.sidebar-widget-body --> 
         </div>
-        <hr>
+        <!-- /.sidebar-widget --> 
+        <!-- ============================================== BEST SELLER : END ============================================== --> 
+        
+   
+        <!-- ============================================== FEATURED PRODUCTS ============================================== -->
+        <section class="section wow fadeInUp new-arriavls">
+          <h3 class="section-title">New Arrivals</h3>
+          <div class="owl-carousel home-owl-carousel custom-carousel owl-theme outer-top-xs">
+            <div class="item item-carousel">
+              <div class="products">
+                <div class="product">
+                  <div class="product-image">
+                    <div class="image"> <a href="detail.html"><img  src="assets/images/products/p19.jpg" alt=""></a> </div>
+                    <!-- /.image -->
+                    
+                    <div class="tag new"><span>new</span></div>
+                  </div>
+                  <!-- /.product-image -->
+                  
+                  <div class="product-info text-left">
+                    <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+                    <div class="rating rateit-small"></div>
+                    <div class="description"></div>
+                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+                    <!-- /.product-price --> 
+                    
+                  </div>
+                  <!-- /.product-info -->
+                  <div class="cart clearfix animate-effect">
+                    <div class="action">
+                      <ul class="list-unstyled">
+                        <li class="add-cart-button btn-group">
+                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                      </ul>
+                    </div>
+                    <!-- /.action --> 
+                  </div>
+                  <!-- /.cart --> 
+                </div>
+                <!-- /.product --> 
+                
+              </div>
+              <!-- /.products --> 
+            </div>
+            <!-- /.item -->
+            
+            <div class="item item-carousel">
+              <div class="products">
+                <div class="product">
+                  <div class="product-image">
+                    <div class="image"> <a href="detail.html"><img  src="assets/images/products/p28.jpg" alt=""></a> </div>
+                    <!-- /.image -->
+                    
+                    <div class="tag new"><span>new</span></div>
+                  </div>
+                  <!-- /.product-image -->
+                  
+                  <div class="product-info text-left">
+                    <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+                    <div class="rating rateit-small"></div>
+                    <div class="description"></div>
+                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+                    <!-- /.product-price --> 
+                    
+                  </div>
+                  <!-- /.product-info -->
+                  <div class="cart clearfix animate-effect">
+                    <div class="action">
+                      <ul class="list-unstyled">
+                        <li class="add-cart-button btn-group">
+                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                      </ul>
+                    </div>
+                    <!-- /.action --> 
+                  </div>
+                  <!-- /.cart --> 
+                </div>
+                <!-- /.product --> 
+                
+              </div>
+              <!-- /.products --> 
+            </div>
+            <!-- /.item -->
+            
+            <div class="item item-carousel">
+              <div class="products">
+                <div class="product">
+                  <div class="product-image">
+                    <div class="image"> <a href="detail.html"><img  src="assets/images/products/p30.jpg" alt=""></a> </div>
+                    <!-- /.image -->
+                    
+                    <div class="tag hot"><span>hot</span></div>
+                  </div>
+                  <!-- /.product-image -->
+                  
+                  <div class="product-info text-left">
+                    <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+                    <div class="rating rateit-small"></div>
+                    <div class="description"></div>
+                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+                    <!-- /.product-price --> 
+                    
+                  </div>
+                  <!-- /.product-info -->
+                  <div class="cart clearfix animate-effect">
+                    <div class="action">
+                      <ul class="list-unstyled">
+                        <li class="add-cart-button btn-group">
+                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                      </ul>
+                    </div>
+                    <!-- /.action --> 
+                  </div>
+                  <!-- /.cart --> 
+                </div>
+                <!-- /.product --> 
+                
+              </div>
+              <!-- /.products --> 
+            </div>
+            <!-- /.item -->
+            
+            <div class="item item-carousel">
+              <div class="products">
+                <div class="product">
+                  <div class="product-image">
+                    <div class="image"> <a href="detail.html"><img  src="assets/images/products/p1.jpg" alt=""></a> </div>
+                    <!-- /.image -->
+                    
+                    <div class="tag hot"><span>hot</span></div>
+                  </div>
+                  <!-- /.product-image -->
+                  
+                  <div class="product-info text-left">
+                    <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+                    <div class="rating rateit-small"></div>
+                    <div class="description"></div>
+                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+                    <!-- /.product-price --> 
+                    
+                  </div>
+                  <!-- /.product-info -->
+                  <div class="cart clearfix animate-effect">
+                    <div class="action">
+                      <ul class="list-unstyled">
+                        <li class="add-cart-button btn-group">
+                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                      </ul>
+                    </div>
+                    <!-- /.action --> 
+                  </div>
+                  <!-- /.cart --> 
+                </div>
+                <!-- /.product --> 
+                
+              </div>
+              <!-- /.products --> 
+            </div>
+            <!-- /.item -->
+            
+            <div class="item item-carousel">
+              <div class="products">
+                <div class="product">
+                  <div class="product-image">
+                    <div class="image"> <a href="detail.html"><img  src="assets/images/products/p2.jpg" alt=""></a> </div>
+                    <!-- /.image -->
+                    
+                    <div class="tag sale"><span>sale</span></div>
+                  </div>
+                  <!-- /.product-image -->
+                  
+                  <div class="product-info text-left">
+                    <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+                    <div class="rating rateit-small"></div>
+                    <div class="description"></div>
+                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+                    <!-- /.product-price --> 
+                    
+                  </div>
+                  <!-- /.product-info -->
+                  <div class="cart clearfix animate-effect">
+                    <div class="action">
+                      <ul class="list-unstyled">
+                        <li class="add-cart-button btn-group">
+                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                      </ul>
+                    </div>
+                    <!-- /.action --> 
+                  </div>
+                  <!-- /.cart --> 
+                </div>
+                <!-- /.product --> 
+                
+              </div>
+              <!-- /.products --> 
+            </div>
+            <!-- /.item -->
+            
+            <div class="item item-carousel">
+              <div class="products">
+                <div class="product">
+                  <div class="product-image">
+                    <div class="image"> <a href="detail.html"><img  src="assets/images/products/p3.jpg" alt=""></a> </div>
+                    <!-- /.image -->
+                    
+                    <div class="tag sale"><span>sale</span></div>
+                  </div>
+                  <!-- /.product-image -->
+                  
+                  <div class="product-info text-left">
+                    <h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
+                    <div class="rating rateit-small"></div>
+                    <div class="description"></div>
+                    <div class="product-price"> <span class="price"> $450.99 </span> <span class="price-before-discount">$ 800</span> </div>
+                    <!-- /.product-price --> 
+                    
+                  </div>
+                  <!-- /.product-info -->
+                  <div class="cart clearfix animate-effect">
+                    <div class="action">
+                      <ul class="list-unstyled">
+                        <li class="add-cart-button btn-group">
+                          <button class="btn btn-primary icon" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
+                          <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+                        </li>
+                        <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
+                        <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal" aria-hidden="true"></i> </a> </li>
+                      </ul>
+                    </div>
+                    <!-- /.action --> 
+                  </div>
+                  <!-- /.cart --> 
+                </div>
+                <!-- /.product --> 
+                
+              </div>
+              <!-- /.products --> 
+            </div>
+            <!-- /.item --> 
+          </div>
+          <!-- /.home-owl-carousel --> 
+        </section>
+        <!-- /.section --> 
+        <!-- ============================================== FEATURED PRODUCTS : END ============================================== --> 
+        
+      </div>
+      <!-- /.homebanner-holder --> 
+      <!-- ============================================== CONTENT : END ============================================== --> 
     </div>
-    <!-- /.col -->
-    <div class="col-md-12 end-box ">
-        &copy; 2014 | &nbsp; All Rights Reserved | &nbsp; www.yourdomain.com | &nbsp; 24x7 support | &nbsp; Email us: info@yourdomain.com
+    
+  </div>
+  <!-- /.container --> 
+</div>
+<!-- /#top-banner-and-menu --> 
+
+<!-- ============================================================= FOOTER ============================================================= -->
+<footer id="footer" class="footer color-bg">
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Contact Us</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class="toggle-footer" style="">
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p>Example address</p>
+                </div>
+              </li>
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body">
+                  <p>+(888) 123-4567<br>
+                    +(888) 456-7890</p>
+                </div>
+              </li>
+              <li class="media">
+                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
+                <div class="media-body"> <span><a href="#">medlights@themesground.com</a></span> </div>
+              </li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Customer Service</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a href="#" title="Contact us">My Account</a></li>
+              <li><a href="#" title="About us">Order History</a></li>
+              <li><a href="#" title="faq">FAQ</a></li>
+              <li><a href="#" title="Popular Searches">Specials</a></li>
+              <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Corporation</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a title="Your Account" href="#">About us</a></li>
+              <li><a title="Information" href="#">Customer Service</a></li>
+              <li><a title="Addresses" href="#">Company</a></li>
+              <li><a title="Addresses" href="#">Investor Relations</a></li>
+              <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+        <!-- /.col -->
+        
+        <div class="col-xs-12 col-sm-6 col-md-3">
+          <div class="module-heading">
+            <h4 class="module-title">Why Choose Us</h4>
+          </div>
+          <!-- /.module-heading -->
+          
+          <div class="module-body">
+            <ul class='list-unstyled'>
+              <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
+              <li><a href="#" title="Blog">Blog</a></li>
+              <li><a href="#" title="Company">Company</a></li>
+              <li><a href="#" title="Investor Relations">Investor Relations</a></li>
+              <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
+            </ul>
+          </div>
+          <!-- /.module-body --> 
+        </div>
+      </div>
     </div>
-    <!-- /.col -->
-    <!--Footer end -->
-    <!--Core JavaScript file  -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
-    <!--bootstrap JavaScript file  -->
-    <script src="assets/js/bootstrap.js"></script>
-    <!--Slider JavaScript file  -->
-    <script src="assets/ItemSlider/js/modernizr.custom.63321.js"></script>
-    <script src="assets/ItemSlider/js/jquery.catslider.js"></script>
-    <script>
-        $(function () {
+  </div>
+  <div class="copyright-bar">
+    <div class="container">
 
-            $('#mi-slider').catslider();
+      <div class="col-xs-12 col-sm-6 no-padding">
+        <div class="clearfix payment-methods">
+          <ul>
+            <li><img src="assets/images/payments/1.png" alt=""></li>
+            <li><img src="assets/images/payments/2.png" alt=""></li>
+            <li><img src="assets/images/payments/3.png" alt=""></li>
+            <li><img src="assets/images/payments/4.png" alt=""></li>
+            <li><img src="assets/images/payments/5.png" alt=""></li>
+          </ul>
+        </div>
+        <!-- /.payment-methods --> 
+      </div>
+    </div>
+  </div>
+</footer>
+<!-- ============================================================= FOOTER : END============================================================= --> 
 
-        });
-    </script>
+<!-- For demo purposes – can be removed on production --> 
+
+<!-- For demo purposes – can be removed on production : End --> 
+
+<!-- JavaScripts placed at the end of the document so the pages load faster --> 
+<script src="assets/js/jquery-1.11.1.min.js"></script> 
+<script src="assets/js/bootstrap.min.js"></script> 
+<script src="assets/js/bootstrap-hover-dropdown.min.js"></script> 
+<script src="assets/js/owl.carousel.min.js"></script> 
+<script src="assets/js/echo.min.js"></script> 
+<script src="assets/js/jquery.easing-1.3.min.js"></script> 
+<script src="assets/js/bootstrap-slider.min.js"></script> 
+<script src="assets/js/jquery.rateit.min.js"></script> 
+<script type="text/javascript" src="assets/js/lightbox.min.js"></script> 
+<script src="assets/js/bootstrap-select.min.js"></script> 
+<script src="assets/js/wow.min.js"></script> 
+<script src="assets/js/scripts.js"></script>
 </body>
 </html>

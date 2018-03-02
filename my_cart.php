@@ -33,7 +33,7 @@ include './assets/navbar.php';
                 $cost = $row['2'] * $quantity;
                 $total = $total + $cost;
 
-                echo '<h4>Name: '.$row['0'].'</h4>';
+                echo '<h4>Name: '..'</h4>';
                 echo '<h4>Quantity: '.$quantity.'&nbsp;</h4>';
                 echo "<div style='float:right;'>";
                 // echo "<label>Modify the quantity:<label>";
