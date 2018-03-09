@@ -1,7 +1,7 @@
 <?php 
 include './database/DB.php';
 session_start();
-include './assets/navbar.php';
+include './api/navbar.php';
 
 $target_dir = "images/";
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);

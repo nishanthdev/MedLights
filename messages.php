@@ -36,8 +36,8 @@ $reciever = "";
         <div class="container">
 
       <?php 
-$sid = "";
-$rid ="";
+      $sid = "";
+      $rid ="";
       $sm = "select body, sender, reciever from message ORDER BY `message`.`sent_at` ASC";
        $result = $link->query($sm);
        while ($row=mysqli_fetch_row($result)) {
