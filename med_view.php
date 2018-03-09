@@ -1,7 +1,7 @@
  <?php
 include "./database/DB.php";
  session_start();
- include './assets/navbar.php';
+ include './api/navbar.php';
 if(!isset($_SESSION["state"]))
 {
   header('Location:login.php');
