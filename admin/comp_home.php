@@ -6,7 +6,7 @@ if(!isset($_SESSION["state"]))
   header('Location:../login.php');
 } else {
   if ($_SESSION['type']=='admin') {
-    echo "logged in";
+    // echo "logged in";
   } else {
     echo "<script>alert('You are not admin'); window.location='../login.php';</script>";
   }
@@ -27,41 +27,7 @@ $result = $link->query($query);
   </head>
   <body>
 
-    <nav class="navbar navbar-default">
-      <!-- <div class="container"> -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">OGP</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Dashboard</a></li>
-     <li role="presentation" class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-          Operations <span class="caret"></span>
-        </a>
-    <ul class="dropdown-menu">
-                <li><a href="#">Medicines</a></li>
-                <li><a href="#">Users</a></li>
-                <li><a href="#">Category</a></li>
-                <li><a href="#">Compositions</a></li>
-                <li><a href="#">Purchase</a></li>
-                <li><a href="#">Reports</a></li>
-              </ul>
-          <li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Welcome, Brad</a></li>
-            <li><a href="login.html">Logout</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      <!-- </div> -->
-    </nav>
+    <?php include 'nav.php'; ?>
 
     <header id="header">
       <div class="container-fluid">

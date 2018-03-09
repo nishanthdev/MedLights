@@ -2,7 +2,7 @@
 session_start();
 include "./database/DB.php";
 $userid = $_SESSION['id'];
-include './assets/navbar.php';
+include './api/navbar.php';
 $reciever = "";
  ?>
 <div class="container">

@@ -19,19 +19,17 @@ while($row = mysqli_fetch_row($result)) {
        }
       $_SESSION["id"] = "$row[0]";
       if ($row[2]=='admin') {
-        header('Location:./admin/admin_home.php');
+        header('Location:./admin/index.php');
       } elseif ($row[2]=='doctor') {
-        header('Location:./doctor/doc_home.php');
+        header('Location:index.php');
       } elseif ($row[2]=='pharmacist') {
-        header('Location:./admin/admin_home.php');
-      } elseif ($row[2]=='admin') {
-        header('Location:./admin/admin_home.php');
+        header('Location:./admin/index.php');
       } else {
         header('Location:index.php');
       }
   }
   else {
-    header('Location:index.php');
+    header('Location:login.php');
   }
   }
 }

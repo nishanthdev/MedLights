@@ -16,7 +16,7 @@ if(!$mysqli){
 }
 
 //query to get data from the table
-$query = sprintf("SELECT * FROM user");
+$query = sprintf("SELECT total_amount, bill_num FROM sales");
 
 //execute query
 $result = $mysqli->query($query);
@@ -34,6 +34,6 @@ $result->close();
 $mysqli->close();
 
 //now print the data
-print json_encode($data);
-
+print json_encode($data,JSON_PRETTY_PRINT);
 ?>
+

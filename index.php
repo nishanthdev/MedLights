@@ -1,10 +1,7 @@
 <?php 
-
-include './database/DB.php';
+include "./database/DB.php";
 
  ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +29,17 @@ include './database/DB.php';
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 </head>
 <body class="cnt-home">
-<?php include "./head.php"; ?>
+<?php include "./head.php"; 
+
+// session_start();
+if(!isset($_SESSION['state']))
+{
+  header('Location:login.php');
+} else {
+  // echo "logged in";
+}
+
+?>
 <!-- ============================================== HEADER ============================================== -->
 <div class="body-content outer-top-xs" id="top-banner-and-menu">
   <div class="container">
@@ -52,7 +59,7 @@ include './database/DB.php';
   
 
                ?>
-              <li class="dropdown menu-item"> <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php echo $row['cat_name']; ?></a></li>
+              <li class="dropdown menu-item"> <a href="products.php?category=<?php echo $row['cat_name']; ?>" > <?php echo $row['cat_name']; ?></a></li>
               <?php } ?>  
               
             </ul>
@@ -62,12 +69,7 @@ include './database/DB.php';
         </div>
         <!-- /.side-menu --> 
         <!-- ============================================== SPECIAL OFFER ============================================== -->
-        
-        <!-- ============================================== Testimonials============================================== -->
-
-        
-        <!-- ============================================== Testimonials: END ============================================== -->
-        
+       
         <!-- <div class="home-banner"> <img src="assets/images/banners/LHS-banner.jpg" alt="Image"> </div> -->
       </div>
       <!-- /.sidemenu-holder --> 
@@ -83,9 +85,9 @@ include './database/DB.php';
               <div class="container-fluid">
                 <div class="caption bg-color vertical-center text-left">
                   <div class="slider-header fadeInDown-1">Top Brands</div>
-                  <div class="big-text fadeInDown-1"> New Collections </div>
-                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</span> </div>
-                  <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                  <div class="big-text fadeInDown-1"> New Medicine </div>
+                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>Buy the best medicines directly form the seller.</span> </div>
+                  <div class="button-holder fadeInDown-3"> <a href="products.php" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                 </div>
                 <!-- /.caption --> 
               </div>
@@ -96,10 +98,10 @@ include './database/DB.php';
             <div class="item" style="background-image: url(assets/images/sliders/02.jpg);">
               <div class="container-fluid">
                 <div class="caption bg-color vertical-center text-left">
-                  <div class="slider-header fadeInDown-1">Spring 2016</div>
-                  <div class="big-text fadeInDown-1"> Women <span class="highlight">Fashion</span> </div>
-                  <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div>
-                  <div class="button-holder fadeInDown-3"> <a href="index.php?page=single-product" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
+                  <div class="slider-header fadeInDown-1">Generic Meds</div>
+                  <div class="big-text fadeInDown-1"> Find an alternative to every medicine here </div>
+                  <!-- <div class="excerpt fadeInDown-2 hidden-xs"> <span>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</span> </div> -->
+                  <div class="button-holder fadeInDown-3"> <a href="products.php?type=generic" class="btn-lg btn btn-uppercase btn-primary shop-now-button">Shop Now</a> </div>
                 </div>
                 <!-- /.caption --> 
               </div>
@@ -114,58 +116,7 @@ include './database/DB.php';
         <!-- ========================================= SECTION – HERO : END ========================================= --> 
         
         <!-- ============================================== INFO BOXES ============================================== -->
-        <div class="info-boxes wow fadeInUp">
-          <div class="info-boxes-inner">
-            <div class="row">
-              <div class="col-md-6 col-sm-4 col-lg-4">
-                <div class="info-box">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <h4 class="info-box-heading green">money back</h4>
-                    </div>
-                  </div>
-                  <h6 class="text">30 Days Money Back Guarantee</h6>
-                </div>
-              </div>
-              <!-- .col -->
-              
-              <div class="hidden-md col-sm-4 col-lg-4">
-                <div class="info-box">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <h4 class="info-box-heading green">free shipping</h4>
-                    </div>
-                  </div>
-                  <h6 class="text">Shipping on orders over $99</h6>
-                </div>
-              </div>
-              <!-- .col -->
-              
-              <div class="col-md-6 col-sm-4 col-lg-4">
-                <div class="info-box">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <h4 class="info-box-heading green">Special Sale</h4>
-                    </div>
-                  </div>
-                  <h6 class="text">Extra $5 off on all items </h6>
-                </div>
-              </div>
-              <!-- .col --> 
-            </div>
-            <!-- /.row --> 
-          </div>
-          <!-- /.info-boxes-inner --> 
-          
-        </div>
-        <!-- /.info-boxes --> 
-        <!-- ============================================== INFO BOXES : END ============================================== --> 
-       
-         
-     
-        <!-- ============================================== BEST SELLER ============================================== -->
-        
-        <div class="best-deal wow fadeInUp outer-bottom-xs">
+         <div class="best-deal wow fadeInUp outer-bottom-xs">
           <h3 class="section-title">Best seller</h3>
           <div class="sidebar-widget-body outer-top-xs">
             <div class="owl-carousel best-seller custom-carousel owl-theme outer-top-xs">
@@ -415,7 +366,6 @@ include './database/DB.php';
         </div>
         <!-- /.sidebar-widget --> 
         <!-- ============================================== BEST SELLER : END ============================================== --> 
-        
    
         <!-- ============================================== FEATURED PRODUCTS ============================================== -->
         <section class="section wow fadeInUp new-arriavls">

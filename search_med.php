@@ -82,8 +82,6 @@ $(document).ready(function(){
     });
 });
 </script>
-</head>
-<body>
   <div class="box">
     <div class="container">
   		<div class="search-box">

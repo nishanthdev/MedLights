@@ -2,7 +2,7 @@
 
 include './database/DB.php';
 session_start();
-include './assets/navbar.php';
+include './api/navbar.php';
 
 #--------------------------------------------------------------------------------------------------------------------------
 // $bill_num = $_SESSION['bill_num'];

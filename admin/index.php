@@ -11,6 +11,10 @@ include '../database/DB.php';
     <title>Admin Area | Dashboard</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
@@ -56,6 +60,25 @@ include '../database/DB.php';
             </div>
 
           </div>
+
+          <?php 
+          $cat = "select * from category";
+          $comp = "select * from composition";
+          $user = "select * from user";
+          $medicine = "select * from medicine";
+
+
+          $rcat = $link->query($cat);
+          $rcomp = $link->query($cat);
+          $ru = $link->query($cat);
+          $rm = $link->query($medicine);
+
+           $num_cat = mysqli_num_rows($rcat);
+           $num_comp = mysqli_num_rows($rcomp);
+           $num_user = mysqli_num_rows($ru);
+           $num_med = mysqli_num_rows($rm);
+
+           ?>
           <div class="col-md-10">
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
@@ -64,25 +87,27 @@ include '../database/DB.php';
               <div class="panel-body">
                 <div class="col-md-3">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 203</h2>
+                    <h2><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <?php echo $num_user; ?></h2>
                     <h4>Users</h4>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 12</h2>
+                    <h2><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> <?php echo $num_med; ?></h2>
                     <h4>Medicines</h4>
                   </div>
                 </div>
                 <div class="col-md-3">
                   <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> 33</h2>
+                    <h2><span class="glyphicon glyphicon-tags" aria-hidden="true"></span> <?php echo $num_cat; ?></h2>
                     <h4>Categories</h4>
                   </div>
                 </div>
                 <div class="col-md-3">
+
+                  
                   <div class="well dash-box">
-                    <h2><span class="glyphicon glyphicon-tint" aria-hidden="true"></span> 12,334</h2>
+                    <h2><span class="glyphicon glyphicon-tint" aria-hidden="true"></span> <?php echo $num_comp; ?> </h2>
                     <h4>Compositions</h4>
                   </div>
                 </div>
@@ -97,72 +122,11 @@ include '../database/DB.php';
                 <div class="panel-body">
                       <div class="row">
                         <div class="col-md-6">
-                          <table class="table table-striped table-hover">
-                              <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Joined</th>
-                              </tr>
-                              <tr>
-                                <td>Jill Smith</td>
-                                <td>jillsmith@gmail.com</td>
-                                <td>Dec 12, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>Eve Jackson</td>
-                                <td>ejackson@yahoo.com</td>
-                                <td>Dec 13, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>John Doe</td>
-                                <td>jdoe@gmail.com</td>
-                                <td>Dec 13, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>Stephanie Landon</td>
-                                <td>landon@yahoo.com</td>
-                                <td>Dec 14, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>Mike Johnson</td>
-                                <td>mjohnson@gmail.com</td>
-                                <td>Dec 15, 2016</td>
-                              </tr>
-                            </table>
+                         <canvas id="mycanvas"></canvas>
                         </div>
                         <div class="col-md-6">
-                          <table class="table table-striped table-hover">
-                              <tr>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Joined</th>
-                              </tr>
-                              <tr>
-                                <td>Jill Smith</td>
-                                <td>jillsmith@gmail.com</td>
-                                <td>Dec 12, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>Eve Jackson</td>
-                                <td>ejackson@yahoo.com</td>
-                                <td>Dec 13, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>John Doe</td>
-                                <td>jdoe@gmail.com</td>
-                                <td>Dec 13, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>Stephanie Landon</td>
-                                <td>landon@yahoo.com</td>
-                                <td>Dec 14, 2016</td>
-                              </tr>
-                              <tr>
-                                <td>Mike Johnson</td>
-                                <td>mjohnson@gmail.com</td>
-                                <td>Dec 15, 2016</td>
-                              </tr>
-                            </table>
+                          <canvas id="myChart2"></canvas>
+                          
                         </div>
                       </div>
 

@@ -2,14 +2,13 @@
 
 include "./database/DB.php";
  session_start();
- include './assets/navbar.php';
-if(!isset($_SESSION["state"]))
+ include './api/navbar.php';
+if(!isset($_SESSION['state']))
 {
   header('Location:login.php');
 } else {
   // echo "logged in";
 }
-$id = $_GET['id'];
 $query = "select * from user where user_id=$id";
 $result = $link->query($query);
 
