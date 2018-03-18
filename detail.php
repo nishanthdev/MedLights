@@ -65,29 +65,28 @@ $type = "";
 <div class="sidebar-widget hot-deals wow fadeInUp outer-top-vs">
 	<h3 class="section-title">hot deals</h3>
 	<div class="owl-carousel sidebar-carousel custom-carousel owl-theme outer-top-xs">
-		
+		<?php 
+
+		$SELECT = "SELECT * from medicine limit 1";
+		$res = $link->query($SELECT);
+		while($row=mysqli_fetch_assoc($res)) {
+		 ?>
 					<div class="item">
 					<div class="products">
 						<div class="hot-deal-wrapper">
 							<div class="image">
-								<img src="assets/images/hot-deals/p5.jpg" alt="">
-							</div>
-							<div class="sale-offer-tag"><span>35%<br>off</span></div>
-							<div class="timing-wrapper">
-								
+								<img src="./admin/meds/<?php echo $row['pic']; ?>" alt="">
 							</div>
 						</div><!-- /.hot-deal-wrapper -->
 
 						<div class="product-info text-left m-t-20">
-							<h3 class="name"><a href="detail.html">Floral Print Buttoned</a></h3>
-							<div class="rating rateit-small"></div>
+							<h3 class="name"><a href="detail.php?id=<?php echo $row['med_id']; ?>"><?php echo $row['med_name']; ?></a></h3>
 
 							<div class="product-price">	
 								<span class="price">
-									$600.00
+									<?php echo $row['price']; ?>
 								</span>
 									
-							    <span class="price-before-discount">$800.00</span>					
 							
 							</div><!-- /.product-price -->
 							
@@ -100,7 +99,7 @@ $type = "";
 									<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
 										<i class="fa fa-shopping-cart"></i>													
 									</button>
-									<button class="btn btn-primary cart-btn" type="button">Add to cart</button>
+									 <button class="btn btn-primary cart-btn"><a href="cart.php?action=add&id=<?php echo $row['med_id']; ?>">Add to cart</a></button>
 															
 								</div>
 								
@@ -109,7 +108,7 @@ $type = "";
 					</div>	
 					</div>		        
 													
-													
+										<?php } ?>			
 						
 	    
     </div><!-- /.sidebar-widget -->
@@ -122,14 +121,23 @@ $type = "";
 			<div class='col-md-9'>
             <div class="detail-block">
 				<div class="row  wow fadeInUp">
-                
+                <?php 
+$y = "SELECT medicine.med_id as mid,medicine.pic as pic, medicine.med_name as mname, medicine.quantity as mqty, medicine.med_desc as mdesc, medicine.price as mprice, medicine.type as mtype, med_comp.comp_id as cid FROM medicine,med_comp where medicine.med_id = med_comp.med_id AND medicine.med_id = '$mid'";
+$r = $link->query($y);
+
+while($row = mysqli_fetch_assoc($r))
+{ 
+					$type = $row['mtype'];
+                  $comp = $row['cid'];
+
+	?> 
 	<div class="col-xs-12 col-sm-6 col-md-5 gallery-holder">
     <div class="product-item-holder size-big single-product-gallery small-gallery">
 
         <div id="owl-single-product">
             <div class="single-product-gallery-item" id="slide1">
                 <a data-lightbox="image-1" data-title="Gallery" href="assets/images/products/p8.jpg">
-                    <img class="img-responsive" alt="" src="assets/images/blank.gif" data-echo="assets/images/products/p8.jpg" />
+                    <img class="img-responsive" alt="" src="./admin/meds/<?php echo $row['pic']; ?>" />
                 </a>
             </div><!-- /.single-product-gallery-item -->
 
@@ -143,16 +151,7 @@ $type = "";
 
     </div><!-- /.single-product-gallery -->
 </div><!-- /.gallery-holder -->        			
-<?php 
-$y = "SELECT medicine.med_id as mid, medicine.med_name as mname, medicine.quantity as mqty, medicine.med_desc as mdesc, medicine.price as mprice, medicine.type as mtype, med_comp.comp_id as cid FROM medicine,med_comp where medicine.med_id = med_comp.med_id AND medicine.med_id = '$mid'";
-$r = $link->query($y);
 
-while($row = mysqli_fetch_assoc($r))
-{ 
-					$type = $row['mtype'];
-                  $comp = $row['cid'];
-
-	?> 
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
 							<h1 class="name"><?php echo $row['mname']; ?></h1>
@@ -208,20 +207,6 @@ while($row = mysqli_fetch_assoc($r))
 									<div class="col-sm-6">
 										<div class="price-box">
 											<span class="price">Rs. <?php echo $row['mprice']; ?></span>
-										</div>
-									</div>
-
-									<div class="col-sm-6">
-										<div class="favorite-button m-t-10">
-											<a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Wishlist" href="#">
-											    <i class="fa fa-heart"></i>
-											</a>
-											<a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="Add to Compare" href="#">
-											   <i class="fa fa-signal"></i>
-											</a>
-											<a class="btn btn-primary" data-toggle="tooltip" data-placement="right" title="E-mail" href="#">
-											    <i class="fa fa-envelope"></i>
-											</a>
 										</div>
 									</div>
 

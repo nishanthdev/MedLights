@@ -94,37 +94,9 @@ $result = $link->query($query);
               </div>
               <div class="panel-body">
                   <a href="med_add.php" class="btn btn-lg btn-info">Add Medicine</a></p>
-                    <input class="form-control" type="text" placeholder="Search medicine...">
+                    <input class="form-control" type="text" name="search_text" id="search_text" placeholder="Search medicine...">
                 <br>
-                <table border="1" class="table table-bordered table-fluid">
-      						<tr>
-      							<th>Name</th>
-      							<th>Man date</th>
-      							<th>Exp date</th>
-      							<th>Brand</th>
-      							<th>Price</th>
-      							<th>Description</th>
-      							<th>Type</th>
-                   	<th>Stock</th>
-      							<th colspan="2">Action</th>
-      						</tr>
-      					<?php while($row = mysqli_fetch_row($result))
-      					{ ?>
-      					<tr>
-      						<td><?php echo $row['1']; ?></td>
-      						<td><?php echo $row['2']; ?></td>
-                  <td><?php echo $row['3']; ?></td>
-      			            <td><?php echo $row['5']; ?></td>
-      			            <td><?php echo $row['6']; ?></td>
-      			            <td><?php echo $row['7']; ?></td>
-      			            <td><?php echo ucwords($row['8']); ?></td>
-      			            <td><?php echo $row['9']; ?></td>
-            						<td><a href="med_edit.php?id=<?php echo $row[0]; ?>" class="btn btn-success btn-block">Edit</a></td>
-            						<td><a href="med_delete.php?id=<?php echo $row[0]; ?>" class="btn btn-danger btn-block">Delete</a></td>
-      					</tr>
-      				<?php 	}
-      				 ?>
-      					</table>
+                <div id="result"></div>
               </div>
               </div>
 
@@ -141,5 +113,35 @@ $result = $link->query($query);
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+<script>
+$(document).ready(function(){
+  load_data();
+  function load_data(query)
+  {
+    $.ajax({
+      url:"fetch_med.php",
+      method:"post",
+      data:{query:query},
+      success:function(data)
+      {
+        $('#result').html(data);
+      }
+    });
+  }
+  
+  $('#search_text').keyup(function(){
+    var search = $(this).val();
+    if(search != '')
+    {
+      load_data(search);
+    }
+    else
+    {
+      load_data();      
+    }
+  });
+});
+</script>
   </body>
 </html>

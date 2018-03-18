@@ -1,21 +1,21 @@
 <?php
 session_start();
 include './database/DB.php';
-$id = $_SESSION["id"];
-// $_SESSION['cart'] = 0;
-$count = count($_SESSION['cart']);
-$cart = 0;
-if ($count == 0) {
-  $cart = 0;
-} else {
-  $cart = $count;
-}
-$sql = "SELECT type, name FROM user WHERE user_id = '$id'";
+
+if(isset($_SESSION["id"])) {
+  $id = $_SESSION["id"];
+  $sql = "SELECT type, name FROM user WHERE user_id = '$id'";
         $result = $link->query($sql);
 $name = "";
 while($row = mysqli_fetch_row($result)) {
 $name = $row['1'];
 }
+} else {
+  $name = "Guest";
+}
+// $_SESSION['cart'] = 0;
+
+
 ?>
 <!-- ============================================== HEADER ============================================== -->
 <header class="header-style-1">
@@ -46,7 +46,7 @@ $name = $row['1'];
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
           <!-- ============================================================= LOGO ============================================================= -->
-          <div class="logo"> <a href="index.php"> <img src="assets/images/logo.png" alt="logo"> </a> </div>
+          <div class="logo"> <a href="index.php"> <h1 style="color: white; margin-top: 0;"><strong>MediLights</strong></h1> </a> </div>
           <!-- /.logo -->
           <!-- ============================================================= LOGO : END ============================================================= --> </div>
         <!-- /.logo-holder -->
@@ -56,14 +56,68 @@ $name = $row['1'];
           <!-- ============================================================= SEARCH AREA ============================================================= -->
           <div class="search-area">
             <form>
-              <div class="control-group">
+              <div class="control-group search-box">
                 <input class="search-field" type="text" style="width:100%; border-radius:0" placeholder="Search here..." />
                 <!-- <a class="btn btn-warning" style=" border-radius:0" href="#"> Search </a> -->
-              </div>
               <div class="result"></div>
+              </div>
             </form>
           </div>
+          <style type="text/css">
+                /* Formatting search box */
+    .search-box{
+        position: relative;
+        /*display: inline-block;*/
+        font-size: 14px;
+    }
+ 
+    .result{
+        position: absolute;
+        z-index: 999;
+        top: 100%;
+        left: 0;
+    }
+    .result{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    /* Formatting result items */
+    .result p{
+        margin: 0;
+        padding: 7px 10px;
+        border: 1px solid #CCCCCC;
+        border-top: none;
+        cursor: pointer;
+    }
+    .result p:hover{
+        background: #f2f2f2;
+    }
+          </style>
+          <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $('.search-box input[type="text"]').on("keyup input", function(){
 
+        var inputVal = $(this).val();
+
+        var resultDropdown = $(this).siblings(".result");
+        if(inputVal.length){
+            $.get("search.php", {term: inputVal}).done(function(data){
+
+                resultDropdown.html(data);
+            });
+        } else{
+            resultDropdown.empty();
+        }
+    });
+
+    // Set search input value on click of result item
+    $(document).on("click", ".result p", function(){
+        $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
+        $(this).parent(".result").empty();
+    });
+});
+</script>
 
           <!-- /.search-area -->
           <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
@@ -71,7 +125,19 @@ $name = $row['1'];
 
         <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
           <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
+          <?php 
 
+if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+          $count = count($_SESSION['cart']);
+$cart = 0;
+if ($count == 0) {
+  $cart = 0;
+} else {
+  $cart = $count;
+}
+} else {
+$cart = 0;
+}?>
           <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
             <div class="items-cart-inner">
               <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
@@ -168,17 +234,30 @@ $name = $row['1'];
                   <a href="products.php?type=generic" >Generic</a>
                 </li>
                 <li class="dropdown hidden-sm">
+                  <a href="doctor_list.php">Messaging</a>
+                </li>
+                <li class="dropdown hidden-sm">
                   <a href="my_cart.php">My Cart</a>
                 </li>
                 <li class="dropdown hidden-sm">
                   <a href="payment.php">Checkout</a>
                 </li>
+                <?php if(isset($_SESSION['id'])) { ?>
                <li class="dropdown  navbar-right special-menu">
                  <a href="logout.php">Logout</a>
                </li>
                <li class="dropdown navbar-right">
                  <a href="view_profile.php"><?php echo $name; ?>'s profile</a>
                </li>
+               <?php } else {
+                 ?>
+                 <li class="dropdown  navbar-right special-menu">
+                 <a href="login.php">Login</a>
+               </li>
+               <li class="dropdown navbar-right">
+                 <a href="login.php"><?php echo $name; ?>'s profile</a>
+               </li>
+               <?php } ?>
               </ul>
               <!-- /.navbar-nav -->
               <div class="clearfix"></div>

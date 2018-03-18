@@ -21,7 +21,7 @@ if(isset($_REQUEST['term'])){
                 while($row = $result->fetch_array(MYSQLI_ASSOC)){
                     echo "<ul class='list-group'>
                           <li class='list-group-item'>
-                          <a href='med_view.php?id=".$row["med_id"]."'>" . $row["med_name"] . "</li>";
+                          <a href='detail.php?id=".$row["med_id"]."'>" . $row["med_name"] . "</li>";
                 }
             } else{
                 echo "<ul class='list-group'>

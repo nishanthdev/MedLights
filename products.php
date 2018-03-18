@@ -69,7 +69,7 @@ include './database/DB.php'; ?>
 
 
                ?>
-              <li class="dropdown menu-item"> <a href="products.php?cat=<?php echo $row['cat_name']; ?>"> <?php echo $row['cat_name']; ?></a></li>
+              <li class="dropdown menu-item"> <a href="products.php?c=<?php echo $row['cat_name']; ?>"> <?php echo $row['cat_name']; ?></a></li>
               <?php } ?>
 
             </ul>
@@ -139,12 +139,11 @@ include './database/DB.php'; ?>
 
         <div id="category" class="category-carousel hidden-xs">
           <div class="item">
-            <div class="image"> <img src="assets/images/banners/cat-banner-1.jpg" alt="" class="img-responsive"> </div>
+            <div class="image"> <img src="images/slide3.jpg" width="850" height="700" style="opacity: 0.5;" alt="" class="img-responsive"> </div>
             <div class="container-fluid">
               <div class="caption vertical-top text-left">
                 <div class="big-text"> Big Sale </div>
                 <div class="excerpt hidden-sm hidden-md"> Save up to 49% off </div>
-                <div class="excerpt-normal hidden-sm hidden-md"> Lorem ipsum dolor sit amet, consectetur adipiscing elit </div>
               </div>
               <!-- /.caption -->
             </div>
@@ -167,10 +166,10 @@ include './database/DB.php'; ?>
               } elseif (isset($_GET['type'])) {
                 $con = $_GET['type'];
                 $a = "SELECT * from medicine Where type = '$con'";
-              } elseif (isset($_GET['cat'])) {
-                $con = $_GET['cat'];
+              } elseif (isset($_GET['c'])) {
+                $con = $_GET['c'];
 
-                $a = "SELECT medicine.med_id as med_id, medicine.med_name as med_name, medicine.price as price, category.cat_name from medicine, category Where medicine.cat_id = category.cat_id and cat_nam = '$con'";
+                $a = "SELECT medicine.med_id as med_id, medicine.med_name as med_name, medicine.price as price, medicine.pic as pic, category.cat_name from medicine, category Where medicine.cat_id = category.cat_id and cat_name = '$con'";
               } else {
               $a = "SELECT * from medicine";
             }
@@ -182,18 +181,17 @@ include './database/DB.php'; ?>
                     <div class="products">
                       <div class="product">
                         <div class="product-image">
-                          <div class="image"> <a href="detail.php?id=<?php echo $row['med_id']; ?>"><img  src="assets/images/products/p1.jpg" alt=""></a> </div>
+                          <div class="image"> <a href="detail.php?id=<?php echo $row['med_id']; ?>"><img  src="./admin/meds/<?php echo $row['pic']; ?>" alt=""></a> </div>
                           <!-- /.image -->
 
-                          <div class="tag sale"><span>sale</span></div>
                         </div>
                         <!-- /.product-image -->
 
                         <div class="product-info text-left">
                           <h3 class="name"><a href="detail.php?id=<?php echo $row['med_id']; ?>"><?php echo $row['med_name']; ?></a></h3>
-                          <div class="rating rateit-small"></div>
+                          <!-- <div class="rating rateit-small"></div> -->
                           <div class="description"></div>
-                          <div class="product-price"> <span class="price"> <?php echo $row['price']; ?> </span> <span class="price-before-discount">$ 800</span> </div>
+                          <div class="product-price"> <span class="price">Rs. <?php echo $row['price']; ?> </span></div>
                           <!-- /.product-price -->
 
                         </div>
@@ -213,8 +211,6 @@ include './database/DB.php'; ?>
                                 <button class="btn btn-primary icon" onclick="sendToCart('<?php echo $row['med_id'] ;?>')" data-toggle="dropdown" type="button"> <i class="fa fa-shopping-cart"></i> </button>
                                 <button class="btn btn-primary cart-btn" type="button">Add to cart</button>
                               </li>
-                              <li class="lnk wishlist"> <a class="add-to-cart" href="detail.html" title="Wishlist"> <i class="icon fa fa-heart"></i> </a> </li>
-                              <li class="lnk"> <a class="add-to-cart" href="detail.html" title="Compare"> <i class="fa fa-signal"></i> </a> </li>
                             </ul>
                           </div>
                           <!-- /.action -->
@@ -251,7 +247,7 @@ include './database/DB.php'; ?>
     <!-- /.row -->
  </div>
   <!-- /.container -->
-
+ <hr class="mb-4">
 </div>
 <!-- /.body-content -->
 <!-- ============================================================= FOOTER ============================================================= -->

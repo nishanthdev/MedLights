@@ -49,23 +49,51 @@ if(!isset($_SESSION['state']))
         
         <!-- ================================== TOP NAVIGATION ================================== -->
         <div class="side-menu animate-dropdown outer-bottom-xs">
-          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Doctors</div>
+          <div class="head"><i class="icon fa fa-align-justify fa-fw"></i>Recent Chats</div>
           <nav class="yamm megamenu-horizontal">
             <ul class="nav">
-              <?php 
-      // $sql = "select DISTINCT reciever from message where sender = '$userid'";
-      // $results = $link->query($sql);
-      //  while ($row = mysqli_fetch_assoc($results)) {
-      //   $reciever = $row['reciever'];
-        ?>
+              <li class="dropdown menu-item"><a data-toggle="modal" data-target="#myModal">New Chat</a></li>
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">New Chat</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form class="" method="post" action="send_prs.php">
+                      <input type="hidden" name="sender" value="<?php echo $id;?>">
+                      <label>To:</label>
+                      <select class="form-control" name="reciever">
+                       <?php $d = "select name, user_id from user where type ='doctor'";
+                        $res = $link->query($d); 
+                         while ($row = mysqli_fetch_row($res))
+                         {
+                        ?>
+                        <option value="<?php echo $row['1']; ?>"> <?php echo $row['0']; ?></option>
+                        <?php  } ?>
+                      </select>
+                      <label>Message:</label>
+                      <textarea cols="50" class="form-control mb-2" name="message" rows="5"></textarea>
+                      <hr class="mb-3">
+                      <input type="submit" class="btn btn-primary" name="submit" value="send">
+                    </form>
+                   </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
       <!-- <ul class="list-group"> -->
         <?php 
-        $select = "select user_id,username from user where `type` = 'doctor'";
-        $res = $link->query($select);
-        while ($row = mysqli_fetch_row($res)) {
+      $a = "select DISTINCT message.reciever, user.username as uname, user.user_id as uid, user.pic as pic from user, message where message.reciever = user.user_id and sender = '$id'";
+       
+        $res = $link->query($a);
+        while ($row = mysqli_fetch_assoc($res)) {
                 
         ?>
-        <li class="dropdown menu-item"><a href="doctor_list.php?id=<?php echo $row['0']; ?>"><?php echo $row['1']; ?></a></li>
+        <li class="dropdown menu-item"><a href="doctor_list.php?id=<?php echo $row['uid']; ?>"><?php echo $row['uname']; ?></a></li>
               <?php } 
             ?>  
               </ul>
@@ -106,7 +134,7 @@ if(!isset($_SESSION['state']))
           $uid = $row[0];
           } ?>
           <?php 
-          $m1 = "select body,sender,reciever,sent_at from message where sender = '$uid' or reciever = '$uid' ORDER BY sent_at ASC";
+          $m1 = "select body,sender,reciever,sent_at from message where sender = '$uid' and reciever = '$mid' or reciever = '$uid' and sender = '$mid' ORDER BY sent_at ASC";
            $res = $link->query($m1);
            while($row = mysqli_fetch_assoc($res)) {
            
@@ -130,11 +158,11 @@ if(!isset($_SESSION['state']))
       }
       ?>
       <hr>
-              <form class="form-group" method="post">
+              <form class="form-group" action="reply_prs.php" method="post">
             <div class="form-inline">
             <input type="text" style="width: 90%;" name="message" class="form-control">
             <input type="hidden" name="sender" value="<?php echo $uid; ?>">
-            <input type="hidden" name="reciever" value="<?php echo $mid; ?>">
+            <input type="hidden" name="reciever" id="mid" value="<?php echo $mid; ?>">
             <input type="submit" name="submit" class="btn btn-primary" value="send">
             </div>
             </form>
@@ -148,18 +176,6 @@ if(!isset($_SESSION['state']))
     
   </div>
   <!-- /.container --> 
-
-<?php 
-if (isset($_POST['submit'])) {
-$reciever = $_POST['reciever'];
-$sender = $_POST['sender'];
-$body = $_POST['message'];
-$query="INSERT INTO `message`(`body`, `sender`, `reciever`) VALUES ('$body','$sender','$reciever')";
-        if ($result=$link->query($query) == TRUE) {
-    echo '<script>window.location="doctor_list.php";</script>';
-}
-}
- ?>
 
 
 <!--  -->

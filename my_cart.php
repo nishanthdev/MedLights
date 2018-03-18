@@ -83,7 +83,7 @@
 	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
 	    <meta name="robots" content="all">
 
-	    <title>Flipmart premium HTML5 & CSS3 Template</title>
+	    <title>My cart</title>
 
 	    <!-- Bootstrap Core CSS -->
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
@@ -132,12 +132,11 @@
 		<table class="table">
 			<thead>
 				<tr>
-					<th class="cart-romove item">Remove</th>
 					<th class="cart-description item">Image</th>
 					<th class="cart-product-name item">Product Name</th>
-					<th class="cart-edit item">Add</th>
+					<th class="cart-edit item">Decrease</th>
 					<th class="cart-qty item">Quantity</th>
-					<th class="cart-sub-total item">Deduct</th>
+					<th class="cart-sub-total item">Increase</th>
 					<th class="cart-total last-item">Grandtotal</th>
 				</tr>
 			</thead>
@@ -161,17 +160,16 @@
 						$total = 0;
 						foreach($_SESSION['cart'] as $med_id => $quantity)
 						{
-							$sql = "SELECT med_name,med_desc,price,quantity,med_id,type FROM medicine WHERE med_id = $med_id";
+							$sql = "SELECT med_name,med_desc,price,quantity,med_id,type,pic FROM medicine WHERE med_id = $med_id";
 							$result = $link->query($sql);
 							while($row = mysqli_fetch_row($result)) {
 								$cost = $row['2'] * $quantity;
 								$total = $total + $cost;
 				 ?>
 				<tr>
-					<td class="romove-item"><a href="#" title="cancel" class="icon"><i class="fa fa-trash-o"></i></a></td>
 					<td class="cart-image">
 						<a class="entry-thumbnail" href="detail.html">
-						    <img src="assets/images/products/p1.jpg" alt="">
+						    <img src="./admin/meds/<?php echo $row['6']; ?>" alt="">
 						</a>
 					</td>
 					<td class="cart-product-name-info">
@@ -186,13 +184,15 @@
 											<span>Type: <?php echo ucwords($row['5']); ?></span>
 						</div>
 					</td>
-					<td class=""><a class="btn btn-warning" href='cart.php?action=add&id=<?php echo $row[4];?>'>+</a></td>
+                    <td class="cart-product-sub-total"><span class="cart-sub-total-price"><a class="btn btn-danger" href="cart.php?action=remove&id=<?php echo $row[4];?>">-</a></span></td>
+
 					<td class="cart-product-quantity">
 						<div class="quant-input">
 				                <input type="text" value="<?php echo $quantity; ?>" disabled>
 			              </div>
 		            </td>
-					<td class="cart-product-sub-total"><span class="cart-sub-total-price"><a class="btn btn-danger" href="cart.php?action=remove&id=<?php echo $row[4];?>">-</a></span></td>
+                    <td class=""><a class="btn btn-warning" href='cart.php?action=add&id=<?php echo $row[4];?>'>+</a></td>
+
 					<td class="cart-product-grand-total"><span class="cart-grand-total-price"><?php echo $cost; ?></span></td>
 				</tr>
 <?php }
@@ -231,7 +231,7 @@
             // echo '<a href="upload_presc.php"><button class="btn btn-primary" style="float:right;">Check Out</button></a>';
            ?>
 						<div class="cart-checkout-btn pull-right">
-							<a href="upload_presc.php" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
+							<a href="payment.php" class="btn btn-primary checkout-btn">PROCCED TO CHEKOUT</a>
 							<span class="">Checkout with multiples address!</span>
 						</div>
                         <?php }

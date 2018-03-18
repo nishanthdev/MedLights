@@ -6,7 +6,8 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-$sql = "SELECT user_id,password,type FROM user WHERE username='$username'";
+
+echo $sql = "SELECT user_id,password,type FROM user WHERE username='$username'";
         $result = $link->query($sql);
 
 while($row = mysqli_fetch_row($result)) {
@@ -14,9 +15,9 @@ while($row = mysqli_fetch_row($result)) {
       $_SESSION["state"] = "Set";
        $_SESSION["username"] = $username;
        $_SESSION["type"] = $row[2];
-       if ($_SESSION['cart']==0) {
-         $_SESSION["cart"] = null;
-       }
+       // if ($_SESSION['cart']==0) {
+       //   $_SESSION["cart"] = null;
+       // }
       $_SESSION["id"] = "$row[0]";
       if ($row[2]=='admin') {
         header('Location:./admin/index.php');
