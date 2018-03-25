@@ -4,9 +4,7 @@ session_start();
 if(!isset($_SESSION["state"]))
 {
   header('Location:../login.php');
-
 } else {
-
 }
 $query = "select * from category";
 $result = $link->query($query);
@@ -18,25 +16,18 @@ $result = $link->query($query);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Area | Medicine</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-
   <?php include 'nav.php'; ?>
-
     <header id="header">
       <div class="container-fluid">
         <div class="row">
-          <!-- <div class="col-md-10"> -->
             <h1 class="text-center display-4">Medicine</h1>
-          <!-- </div> -->
-
         </div>
       </div>
     </header>
-
     <section id="breadcrumb">
       <div class="container-fluid">
         <ol class="breadcrumb">
@@ -46,7 +37,6 @@ $result = $link->query($query);
         </ol>
       </div>
     </section>
-
     <section id="main">
       <div class="container-fluid">
         <div class="row">
@@ -65,50 +55,49 @@ $result = $link->query($query);
               <a href="purchase.php" class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Purchase </a>
               <a href="report.php" class="list-group-item"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Reports </a>
             </div>
-
           </div>
           <div class="col-md-10">
-
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
                 <h3 class="panel-title">Medicines</h3>
               </div>
               <div class="panel-body">
-                <form class="form-group" action="med_addprs.php" method="post" enctype="multipart/form-data">
+                <form class="form-group" action="med_addprs.php" method="post" id="form" enctype="multipart/form-data">
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="medname">Medicine Name:</label>
-                      <input type="text" name="m_name" class="form-control">
+                      <input type="text" name="m_name" class="form-control" data-validation="custom" data-validation-regexp="^([a-zA-Z0-9 ]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid name">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="med_Desc">Description:</label>
-                      <textarea name="med_desc" rows="1" cols="5" class="form-control"></textarea>
+                      <textarea name="med_desc" rows="1" cols="5" class="form-control"data-validation="custom" data-validation-regexp="^([a-zA-Z0-9 ]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid description"></textarea>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="man_date">Manufatured date:</label>
-                      <input type="date" name="m_date" class="form-control">
+                      <input type="date" name="m_date" class="form-control" data-validation="date">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="man_date">Expire date:</label>
-                      <input type="date" name="e_date" class="form-control">
+                      <input type="date" name="e_date" class="form-control" data-validation="date">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="brand">Brand:</label>
-                      <input type="text" name="brand" class="form-control">
+                      <input type="text" name="brand" class="form-control" data-validation="custom" data-validation-regexp="^([a-zA-Z0-9 _]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid brand name">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="price">Price:</label>
-                      <input type="number" name="price" class="form-control">
+                      <input type="number" name="price" class="form-control" data-validation="number">
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="category">Category:</label>
-                      <select class="form-control" name="category">
+                      <select class="form-control" name="category" data-validation="required">
+                        <option value="">-----------------</option>
                         <?php
                         while($row = mysqli_fetch_row($result))
                         {
@@ -116,36 +105,43 @@ $result = $link->query($query);
                         <option value="<?php echo $row['0']; ?>"><?php echo $row[1]; ?></option>
                           <?php } ?>
                       </select>
-
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="type">Type:</label>
-                      <select class="form-control" name="type">
+                      <select class="form-control" name="type" data-validation="required">
+                        <option value="">-----------------</option>
                         <option value="generic">Generic</option>
-                        <option value="regular" selected>Regular</option>
+                        <option value="regular">Regular</option>
                       </select>
-
-                    </div>
                   </div>
-                  <label for="image">Image:</label>
-                  <input type="file" name="file" id="fileToUpload">
+                  <div class="col-md-12 mb-3">
+                       <label for="image">Image:</label>
+                  <input type="file" name="file" id="fileToUpload" data-validation="required">
+                  </div>
+             </div>
                   <hr>
                   <input type="submit" name="submit" class="btn btn-primary">
                 </form>
               </div>
               </div>
-              <!--  -->
                 </div>
               </div>
           </div>
         </div>
       </div>
     </section>
-
     <footer id="footer">
       <p>Copyright OGP &copy; 2018</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="./js/jquery-1.11.1.min.js"></script>
+  <script src="./js/jquery.form-validator.min.js"></script>
+  </body>
+   <script type="text/javascript">
+   $.validate({
+    form : '#form'
+  });
+  </script>
   </body>
 </html>

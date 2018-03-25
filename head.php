@@ -13,61 +13,59 @@ $name = $row['1'];
 } else {
   $name = "Guest";
 }
-// $_SESSION['cart'] = 0;
-
-
 ?>
-<!-- ============================================== HEADER ============================================== -->
 <header class="header-style-1">
-
-  <!-- ============================================== TOP MENU ============================================== -->
   <div class="top-bar animate-dropdown">
     <div class="container">
       <div class="header-top-inner">
         <div class="cnt-account">
+                   <?php 
+
+if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
+          $count = count($_SESSION['cart']);
+$cart = 0;
+if ($count == 0) {
+  $cart = 0;
+} else {
+  $cart = $count;
+}
+} else {
+$cart = 0;
+}?>
+         <?php if(isset($_SESSION['id'])) { ?>
           <ul class="list-unstyled">
-            <li><a href="account.php"><i class="icon fa fa-user"></i>My Account</a></li>
+            <li><a href="view_profile.php"><i class="icon fa fa-user"></i>My Account</a></li>
             <li><a href="my_cart.php"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+            <?php if ($cart > 0) {
+                ?>
             <li><a href="payment.php"><i class="icon fa fa-check"></i>Checkout</a></li>
+          <?php } ?>
           </ul>
+          <?php } ?>
         </div>
-        <!-- /.cnt-account -->
-        <!-- /.cnt-cart -->
         <div class="clearfix"></div>
       </div>
-      <!-- /.header-top-inner -->
     </div>
-    <!-- /.container -->
   </div>
-  <!-- /.header-top -->
-  <!-- ============================================== TOP MENU : END ============================================== -->
   <div class="main-header">
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 logo-holder">
-          <!-- ============================================================= LOGO ============================================================= -->
           <div class="logo"> <a href="index.php"> <h1 style="color: white; margin-top: 0;"><strong>MediLights</strong></h1> </a> </div>
-          <!-- /.logo -->
-          <!-- ============================================================= LOGO : END ============================================================= --> </div>
-        <!-- /.logo-holder -->
+        </div>
 
         <div class="col-xs-12 col-sm-12 col-md-7 top-search-holder">
-          <!-- /.contact-row -->
-          <!-- ============================================================= SEARCH AREA ============================================================= -->
           <div class="search-area">
             <form>
               <div class="control-group search-box">
                 <input class="search-field" type="text" style="width:100%; border-radius:0" placeholder="Search here..." />
-                <!-- <a class="btn btn-warning" style=" border-radius:0" href="#"> Search </a> -->
               <div class="result"></div>
               </div>
             </form>
           </div>
           <style type="text/css">
-                /* Formatting search box */
     .search-box{
         position: relative;
-        /*display: inline-block;*/
         font-size: 14px;
     }
  
@@ -81,7 +79,6 @@ $name = $row['1'];
         width: 100%;
         box-sizing: border-box;
     }
-    /* Formatting result items */
     .result p{
         margin: 0;
         padding: 7px 10px;
@@ -111,33 +108,14 @@ $(document).ready(function(){
         }
     });
 
-    // Set search input value on click of result item
     $(document).on("click", ".result p", function(){
         $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
         $(this).parent(".result").empty();
     });
 });
 </script>
-
-          <!-- /.search-area -->
-          <!-- ============================================================= SEARCH AREA : END ============================================================= --> </div>
-        <!-- /.top-search-holder -->
-
+           </div>
         <div class="col-xs-12 col-sm-12 col-md-2 animate-dropdown top-cart-row">
-          <!-- ============================================================= SHOPPING CART DROPDOWN ============================================================= -->
-          <?php 
-
-if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
-          $count = count($_SESSION['cart']);
-$cart = 0;
-if ($count == 0) {
-  $cart = 0;
-} else {
-  $cart = $count;
-}
-} else {
-$cart = 0;
-}?>
           <div class="dropdown dropdown-cart"> <a href="#" class="dropdown-toggle lnk-cart" data-toggle="dropdown">
             <div class="items-cart-inner">
               <div class="basket"> <i class="glyphicon glyphicon-shopping-cart"></i> </div>
@@ -153,40 +131,32 @@ $cart = 0;
                       if(isset($_SESSION['cart']) && !empty($_SESSION['cart'])) {
                       $total = 0;
                       foreach($_SESSION['cart'] as $med_id => $quantity) {
-                      $s = "SELECT med_name,med_desc,price,quantity,med_id FROM medicine WHERE med_id = $med_id";
+                      $s = "SELECT med_name,med_desc,price,quantity,med_id,pic FROM medicine WHERE med_id = $med_id";
                       $result = $link->query($s);
                       while($row = mysqli_fetch_row($result)) {
                       $cost = $row['2'] * $quantity;
                       $total = $total + $cost; ?>
                     <div class="col-xs-4">
-                      <div class="image"> <a href="detail.php?id=<?php echo $row[4];  ?>"><img src="assets/images/cart.jpg" alt=""></a> </div>
+                      <div class="image"> <a href="detail.php?id=<?php echo $row[4];  ?>"><img src="./admin/meds/<?php echo $row['5']; ?>" alt=""></a> </div>
                     </div>
                     <div class="col-xs-7">
                       <h3 class="name"><a href="detail.php?id=<?php echo $row[4];  ?>"><?php echo $row['0']; ?></a></h3>
                       <div class="price">Rs. <?php echo $cost; ?></div>
                     </div>
                     <div class="col-xs-1 action">
-                      <a href="#"><i class="fa fa-trash"></i></a>
                       <hr>
                     </div>
                     <hr>
                   <?php  }
                     }
                     ?>
-
                   </div>
-
-
-                  <!-- </div> -->
-                <!-- /.cart-item -->
                 <div class="clearfix"></div>
-
                 <hr>
                 <div class="clearfix cart-total">
                   <div class="pull-right"> <span class="text">Sub Total :</span><span class='price'>Rs. <?php echo $total; ?></span> </div>
                   <div class="clearfix"></div>
-                  <a href="checkout.php" class="btn btn-upper btn-primary btn-block m-t-20">View Cart</a> </div>
-                <!-- /.cart-total-->
+                  <a href="my_cart.php" class="btn btn-upper btn-primary btn-block m-t-20">View Cart</a> </div>
               <?php
               } else { ?>
                 <div class="conatiner">
@@ -198,22 +168,13 @@ $cart = 0;
               </li>
 
             </ul>
-            <!-- /.dropdown-menu-->
           </div>
-          <!-- /.dropdown-cart -->
 
-          <!-- ============================================================= SHOPPING CART DROPDOWN : END============================================================= --> </div>
-        <!-- /.top-cart-row -->
+        </div>
       </div>
-      <!-- /.row -->
-
     </div>
-    <!-- /.container -->
-
   </div>
-  <!-- /.main-header -->
 
-  <!-- ============================================== NAVBAR ============================================== -->
   <div class="header-nav animate-dropdown">
     <div class="container">
       <div class="yamm navbar navbar-default" role="navigation">
@@ -225,7 +186,7 @@ $cart = 0;
           <div class="navbar-collapse collapse" id="mc-horizontal-menu-collapse">
             <div class="nav-outer">
               <ul class="nav navbar-nav">
-                <li class="active dropdown yamm-fw"> <a href="index.php" class="dropdown-toggle">Home</a> </li>
+                <li class="dropdown yamm-fw"> <a href="index.php" class="dropdown-toggle">Home</a> </li>
                 <li class="dropdown yamm mega-menu"> <a href="products.php" class="dropdown-toggle">Medicines</a>
 
                 </li>
@@ -234,14 +195,14 @@ $cart = 0;
                   <a href="products.php?type=generic" >Generic</a>
                 </li>
                 <li class="dropdown hidden-sm">
-                  <a href="doctor_list.php">Messaging</a>
-                </li>
-                <li class="dropdown hidden-sm">
                   <a href="my_cart.php">My Cart</a>
                 </li>
+                <?php if ($cart > 0) {
+                ?>
                 <li class="dropdown hidden-sm">
                   <a href="payment.php">Checkout</a>
                 </li>
+                <?php } ?>
                 <?php if(isset($_SESSION['id'])) { ?>
                <li class="dropdown  navbar-right special-menu">
                  <a href="logout.php">Logout</a>
@@ -249,32 +210,24 @@ $cart = 0;
                <li class="dropdown navbar-right">
                  <a href="view_profile.php"><?php echo $name; ?>'s profile</a>
                </li>
+               <li class="dropdown hidden-sm">
+                  <a href="doctor_list.php">Messaging</a>
+                </li>
                <?php } else {
                  ?>
                  <li class="dropdown  navbar-right special-menu">
                  <a href="login.php">Login</a>
                </li>
                <li class="dropdown navbar-right">
-                 <a href="login.php"><?php echo $name; ?>'s profile</a>
+                 <a href="login.php"><?php echo $name; ?></a>
                </li>
                <?php } ?>
               </ul>
-              <!-- /.navbar-nav -->
               <div class="clearfix"></div>
             </div>
-            <!-- /.nav-outer -->
           </div>
-          <!-- /.navbar-collapse -->
-
         </div>
-        <!-- /.nav-bg-class -->
       </div>
-      <!-- /.navbar-default -->
     </div>
-    <!-- /.container-class -->
-
   </div>
-  <!-- /.header-nav -->
-  <!-- ============================================== NAVBAR : END ============================================== -->
-
 </header>

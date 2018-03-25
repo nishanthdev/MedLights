@@ -16,30 +16,22 @@ $result = $link->query($query);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Area | User</title>
+    <title>Admin Area | Purchase</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-
     <?php include 'nav.php'; ?>
-
     <header id="header">
       <div class="container-fluid">
         <div class="row">
-          <!-- <div class="col-md-10"> -->
             <h1 class="text-center display-4">User</h1>
-          <!-- </div> -->
-
         </div>
       </div>
     </header>
-
     <section id="breadcrumb">
       <div class="container-fluid">
         <ol class="breadcrumb">
@@ -48,7 +40,6 @@ $result = $link->query($query);
         </ol>
       </div>
     </section>
-
     <section id="main">
       <div class="container-fluid">
         <div class="row">
@@ -67,7 +58,6 @@ $result = $link->query($query);
               <a href="purchase.php" class="list-group-item active main-color-bg"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Purchase </a>
               <a href="report.php" class="list-group-item"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Reports </a>
             </div>
-
           </div>
           <div class="col-md-10">
             <div class="panel panel-default">
@@ -86,24 +76,17 @@ $result = $link->query($query);
                     <input type="number" class="form-control" name="quantity" id="quantity"><hr>
                     <input type="submit" class="btn btn-primary" name="submit" value="submit">
                     </form>
-                   
               </div>
               </div>
-
-              <!--  -->
                 </div>
               </div>
           </div>
         </div>
       </div>
     </section>
-
     <footer id="footer">
       <p>Copyright OGP &copy; 2018</p>
     </footer>
-<!--     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
      <script>
       $(function() {
         $( "#med_name" ).autocomplete({

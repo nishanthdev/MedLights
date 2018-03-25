@@ -5,7 +5,6 @@ if(!isset($_SESSION["state"]))
 {
   header('Location:login.php');
 } else {
-  echo "logged in";
 }
 $query ="select * from user";
 $result = $link->query($query);
@@ -17,25 +16,18 @@ $result = $link->query($query);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Area | User</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-
     <?php include 'nav.php'; ?>
-
     <header id="header">
       <div class="container-fluid">
         <div class="row">
-          <!-- <div class="col-md-10"> -->
             <h1 class="text-center display-4">User</h1>
-          <!-- </div> -->
-
         </div>
       </div>
     </header>
-
     <section id="breadcrumb">
       <div class="container-fluid">
         <ol class="breadcrumb">
@@ -45,7 +37,6 @@ $result = $link->query($query);
         </ol>
       </div>
     </section>
-
     <section id="main">
       <div class="container-fluid">
         <div class="row">
@@ -64,25 +55,22 @@ $result = $link->query($query);
               <a href="purchase.php" class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Purchase </a>
               <a href="report.php" class="list-group-item"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Reports </a>
             </div>
-
           </div>
           <div class="col-md-10">
-
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
                 <h3 class="panel-title">Users</h3>
               </div>
               <div class="panel-body">
-                  <form class="form-group" action="user_addprs.php" method="post">
-                  <!-- <div class="container"> -->
+                  <form class="form-group" id="form" action="user_addprs.php" method="post">
                     <div class="row">
                       <div class="col-md-6 mb-3">
                         <label for="name">Name:</label>
-                    <input class="form-control" type="text" name="name" id="name">
+                    <input class="form-control" type="text" name="name" id="name" required  data-validation="custom" data-validation-regexp="^([a-zA-Z ]+)$" data-validation-allowing=" "  rows="1" required data-validation-error-msg="Please enter a valid name.">
                       </div>
                       <div class="col-md-6 mb-3">
-                     <label for="address">Address:</label>
-                    <textarea class="form-control" name="address" id="address" rows="1"></textarea>
+                     <label for="address">Address:</label> <span id="max-length-element">250</span> chars left
+                    <textarea class="form-control" id="text" name="address" id="address" data-validation="custom length" data-validation-length="min10 250" data-validation-regexp="^([a-zA-Z0-9]+)$" data-validation-allowing=" " rows="1" required data-validation-error-msg="Please enter a valid address"></textarea>
                       </div>
                     </div>
                      <label for="gender">Gender:</label> <br>
@@ -99,51 +87,60 @@ $result = $link->query($query);
                       <div class="row">
                     <div class="col-md-6 mb-3">
                     <label for="email">Email:</label>
-                    <input class="form-control" type="text" name="email" id="email">
+                    <input class="form-control" type="text" name="email" id="email" data-validation="email" required data-validation-error-msg="Please enter a valid email.">
                       </div>
                       <div class="col-md-6 mb-3">
                          <label for="number">Number:</label>
-                    <input class="form-control" type="number" name="pnumber" id="pnumber">
+                    <input class="form-control" type="number" required name="pnumber" id="pnumber" data-validation="number" data-validation-error-msg="Please enter a valid phone number.">
                       </div>
                     </div>
                       <div class="row">
                       <div class="col-md-6 mb-3">
                           <label for="role">Role:</label>
-                    <select class="form-control" name="roles">
+                    <select class="form-control" name="roles" data-validation="required">
+                      <option value="">--------type-----------</option>
                       <option value="pharmacist">Pharmacist</option>
                       <option value="doctor">Doctor</option>
                     </select>
                       </div>
                       <div class="col-md-6 mb-3">
                          <label for="username">Username:</label>
-                    <input class="form-control" type="text" name="username" id="email">
+                    <input class="form-control" type="text" name="username"  data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-allowing=" "  rows="1" required data-validation-error-msg="Please enter a valid username.">
                       </div>
-                    </div>
                    
-
+                    <div class="col-md-6 mb-3">
                     <label for="password">Password:</label>
-                    <input class="form-control" type="password" name="password" id="password">
+                    <input class="form-control" type="password" name="password" id="password" data-validation-strength="2" data-validation="length strength alphanumeric" data-validation-length="min6" data-validation-error-msg="Password should be between 6-12 charcters, only alphanumaric charecters...!">
+                    </div>
+                    <div class="col-md-6 mb-3">
                     <label for="confirm password">Confirm Password:</label>
-                    <input class="form-control" type="cpassword" name="cpassword" id="cpassword"> <br>
+                    <input class="form-control" type="password" name="cpassward" data-validation="confirmation"> 
+                  </div>
+                </div><br>
                   <input class="btn btn-primary" type="submit" name="submit" value="Create">
                   <input class="btn btn-danger" type="reset" name="reset" value="Reset">
-                  <!-- </div> -->
                   </form>
               </div>
               </div>
-
-              <!--  -->
                 </div>
               </div>
           </div>
         </div>
       </div>
     </section>
-
     <footer id="footer">
       <p>Copyright OGP &copy; 2018</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+      <script src="js/jquery-1.11.1.min.js"></script>
+  <script src="js/jquery.form-validator.min.js"></script>
+  </body>
+   <script type="text/javascript">
+   $.validate({
+    form : '#form'
+  });
+   $('#text').restrictLength( $('#max-length-element') );
+  </script>
   </body>
 </html>

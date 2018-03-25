@@ -8,8 +8,7 @@ $alert = "";
 $sql = "SELECT email FROM user WHERE email='$email'";
 $result = $link->query($sql);
 $count = $result->num_rows;
-if (!$count == 0) {  //if the counts is not zero the email exists
-// echo "Email already exists";
+if (!$count == 0) { 
 $_SESSION["email"] = $email;
 header('Location:forgot_password.php');
 } else {

@@ -31,11 +31,7 @@ if(isset($_REQUEST['term'])){
             echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
         }
     }
-
-    // Close statement
     $stmt->close();
 }
-
-// Close connection
 $mysqli->close();
 ?>

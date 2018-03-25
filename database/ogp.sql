@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Feb 16, 2018 at 07:12 AM
+-- Generation Time: Mar 21, 2018 at 06:24 AM
 -- Server version: 5.7.19
 -- PHP Version: 7.1.9
 
@@ -34,14 +34,16 @@ CREATE TABLE IF NOT EXISTS `category` (
   `cat_name` varchar(255) NOT NULL,
   `cat_desc` varchar(255) NOT NULL,
   PRIMARY KEY (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
 --
 
 INSERT INTO `category` (`cat_id`, `cat_name`, `cat_desc`) VALUES
-(2, 'cat 1', 'cat 4');
+(2, 'cat_1', 'cat 4'),
+(3, 'ABCD', 'World'),
+(6, 'Hello', 'world1');
 
 -- --------------------------------------------------------
 
@@ -62,9 +64,9 @@ CREATE TABLE IF NOT EXISTS `composition` (
 --
 
 INSERT INTO `composition` (`comp_id`, `comp_name`, `composition`) VALUES
-(2, 'comp', 'comp 256'),
+(2, 'comp', 'comp45'),
 (3, 'comp2', 'cop234'),
-(4, 'Comp 5', 'Comp 2 3 4');
+(4, '12121', '21212122');
 
 -- --------------------------------------------------------
 
@@ -84,20 +86,22 @@ CREATE TABLE IF NOT EXISTS `medicine` (
   `med_desc` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
   `quantity` int(11) DEFAULT '0',
+  `pic` varchar(35) DEFAULT NULL,
   PRIMARY KEY (`med_id`),
   KEY `comp_id` (`cat_id`),
   KEY `cat_id` (`cat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `medicine`
 --
 
-INSERT INTO `medicine` (`med_id`, `med_name`, `man_date`, `exp_date`, `cat_id`, `brand`, `price`, `med_desc`, `type`, `quantity`) VALUES
-(4, 'HEllo', '7998-05-06', '8888-08-08', 2, '88', 350, 'Abcd', 'generic', 250),
-(9, 'abd5', '4444-04-04', '4444-04-04', 0, 'bvd', 270, 'jksdbjkabdk', 'regular', 0),
-(11, 'abcds', '0254-02-05', '5555-04-04', 2, 'Hello', 500, 'wadbkjdbakb', 'generic', 238),
-(12, 'Hello', '1998-12-05', '2005-05-05', 2, 'World', 8, 'ABCD', 'generic', 2255);
+INSERT INTO `medicine` (`med_id`, `med_name`, `man_date`, `exp_date`, `cat_id`, `brand`, `price`, `med_desc`, `type`, `quantity`, `pic`) VALUES
+(4, 'HEllo', '1998-05-06', '1998-05-08', 2, '88', 350, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'generic', 89, NULL),
+(11, 'abcds', '0254-02-05', '5555-04-04', 3, 'Hello', 500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'regular', 234, NULL),
+(12, 'Hello', '1998-12-05', '2005-05-05', 6, 'World', 8, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'generic', 6800, NULL),
+(13, 'abcd', '2016-03-05', '2018-03-05', 2, 'abcd', 500, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.', 'regular', 100, ''),
+(14, 'Paracitamol', '1998-12-05', '2019-02-01', 2, 'abcd', 500, 'This medicine would be used for fever and such perposos', 'regular', 96, 'Untitled.png');
 
 -- --------------------------------------------------------
 
@@ -113,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `med_comp` (
   PRIMARY KEY (`id`),
   KEY `med_id` (`med_id`),
   KEY `comp_id` (`comp_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `med_comp`
@@ -121,9 +125,10 @@ CREATE TABLE IF NOT EXISTS `med_comp` (
 
 INSERT INTO `med_comp` (`id`, `med_id`, `comp_id`) VALUES
 (2, 11, '2,3,4'),
-(4, 12, '2,4'),
-(5, 9, '2,3,4'),
-(6, 4, '2,3,4');
+(4, 12, '2,3,4'),
+(6, 4, '2,3,4'),
+(7, 13, '2,3,4'),
+(8, 14, '2,3');
 
 -- --------------------------------------------------------
 
@@ -140,21 +145,27 @@ CREATE TABLE IF NOT EXISTS `message` (
   `read` int(11) DEFAULT NULL,
   `sent_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `message`
 --
 
 INSERT INTO `message` (`id`, `body`, `sender`, `reciever`, `read`, `sent_at`) VALUES
-(1, 'abcd', 1, 3, 0, '2018-02-16 05:51:42'),
-(7, 'Hello 1', 3, 1, 0, '2018-02-16 05:54:06'),
-(8, 'Hello 3', 1, 3, 0, '2018-02-16 05:54:39'),
-(9, 'abcd', 1, 3, NULL, '2018-02-16 07:02:32'),
-(10, 'a', 3, 1, NULL, '2018-02-16 07:03:18'),
-(11, 'Hello', 1, 3, NULL, '2018-02-16 07:04:34'),
-(12, 'hello nixi', 3, 1, NULL, '2018-02-16 07:07:17'),
-(13, 'Hello Rajanna', 1, 3, NULL, '2018-02-16 07:07:34');
+(61, 'abcd', 1, 3, NULL, '2018-03-18 05:46:57'),
+(62, '123', 1, 3, NULL, '2018-03-18 05:54:46'),
+(63, 'abcd', 1, 3, NULL, '2018-03-18 05:57:29'),
+(64, 'abcd', 1, 3, NULL, '2018-03-18 05:58:10'),
+(65, 'abcd', 1, 3, NULL, '2018-03-18 05:58:27'),
+(66, 'abcd1234', 1, 3, NULL, '2018-03-18 06:06:17'),
+(67, 'Hellow sdj', 3, 1, NULL, '2018-03-18 06:12:23'),
+(68, 'hello', 3, 1, NULL, '2018-03-18 06:14:38'),
+(69, 'hello', 1, 3, NULL, '2018-03-18 06:15:05'),
+(70, 'abcgsjk', 1, 3, NULL, '2018-03-18 06:15:14'),
+(71, 'Hellow', 1, 6, NULL, '2018-03-18 06:43:43'),
+(72, 's', 1, 6, NULL, '2018-03-18 06:44:30'),
+(73, 'abcd', 1, 3, NULL, '2018-03-18 06:46:56'),
+(74, 'Hello World', 1, 3, NULL, '2018-03-19 05:09:48');
 
 -- --------------------------------------------------------
 
@@ -171,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `purchase` (
   `quantity` int(200) NOT NULL,
   PRIMARY KEY (`purch_id`),
   KEY `med_id` (`med_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `purchase`
@@ -179,8 +190,7 @@ CREATE TABLE IF NOT EXISTS `purchase` (
 
 INSERT INTO `purchase` (`purch_id`, `med_id`, `purch_date`, `pur_price`, `quantity`) VALUES
 (1, 11, '0001-01-01', 1000, 500),
-(2, 11, '0002-01-01', 100, 52),
-(3, 12, '0000-00-00', 1252, 2);
+(2, 11, '0002-01-01', 100, 52);
 
 -- --------------------------------------------------------
 
@@ -224,7 +234,7 @@ CREATE TABLE IF NOT EXISTS `sales_desc` (
   PRIMARY KEY (`desc_id`),
   KEY `sales_id` (`sales_id`,`med_id`),
   KEY `med_id` (`med_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sales_desc`
@@ -233,7 +243,16 @@ CREATE TABLE IF NOT EXISTS `sales_desc` (
 INSERT INTO `sales_desc` (`desc_id`, `sales_id`, `med_id`, `quantity`, `price`) VALUES
 (2, 2, 11, 2, 1000),
 (3, 2, 4, 2, 700),
-(4, 2, 4, 2, 700);
+(4, 2, 4, 2, 700),
+(5, 2, 11, 1, 500),
+(6, 2, 11, 1, 500),
+(7, 2, 4, 2, 700),
+(8, 2, 11, 1, 500),
+(9, 2, 4, 1, 350),
+(10, 2, 4, 1, 350),
+(11, 2, 4, 1, 350),
+(12, 2, 4, 1, 350),
+(13, 2, 4, 1, 350);
 
 -- --------------------------------------------------------
 
@@ -252,6 +271,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `type` varchar(255) NOT NULL,
+  `pic` varchar(35) DEFAULT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `username` (`username`)
@@ -261,12 +281,12 @@ CREATE TABLE IF NOT EXISTS `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`user_id`, `name`, `gender`, `address`, `phone`, `username`, `email`, `password`, `type`) VALUES
-(1, 'Nishanth Bhat', 'male', 'Vitla HEllo', 2564566, 'nixi', 'Nishanthbht@gmail.com', 'abcd', 'regular'),
-(3, 'Rajesh', 'male', 'abcd', 98556, 'Rajesh', 'rajesh@example.com', '1234', 'doctor'),
-(4, 'Admin', 'male', 'Admin', 2147483647, 'admin', 'admin@test.com', 'admin', 'admin'),
-(5, 'Vikyath', 'male', 'Vitla', 123456789, 'vicky', 'vikyath@test.com', '123456789', 'pharmacist'),
-(6, 'test', 'male', 'test', 12345, 'test', 'test@test.com', 'test', 'regular');
+INSERT INTO `user` (`user_id`, `name`, `gender`, `address`, `phone`, `username`, `email`, `password`, `type`, `pic`) VALUES
+(1, 'Nishanth Bhat K', 'male', 'Church Road aSchool Road ', 2564566, 'Nishanth', 'Nishanthbht@gmail.com', 'abcd', 'regular', 'photo.jpg'),
+(3, 'Rajesh', 'male', 'abcd', 98556, 'Rajesh', 'rajesh@example.com', '1234', 'doctor', NULL),
+(4, 'Admin', 'male', 'Admin', 2147483647, 'admin', 'admin@test.com', 'admin', 'admin', NULL),
+(5, 'Vikyath', 'male', 'Vitla', 123456789, 'vicky', 'vikyath@test.com', '123456789', 'pharmacist', NULL),
+(6, 'test', 'male', 'test', 12345, 'test', 'test@test.com', 'test', 'doctor', NULL);
 
 --
 -- Constraints for dumped tables
@@ -276,7 +296,7 @@ INSERT INTO `user` (`user_id`, `name`, `gender`, `address`, `phone`, `username`,
 -- Constraints for table `med_comp`
 --
 ALTER TABLE `med_comp`
-  ADD CONSTRAINT `med_comp_ibfk_1` FOREIGN KEY (`med_id`) REFERENCES `medicine` (`med_id`);
+  ADD CONSTRAINT `med_comp_ibfk_1` FOREIGN KEY (`med_id`) REFERENCES `medicine` (`med_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `purchase`

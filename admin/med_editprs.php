@@ -17,7 +17,5 @@ if(isset($_POST['submit'])){
  } else {
    echo "Error: " . $query . "<br>" . $link->error;
  }
-
-
 }
  ?>

@@ -31,7 +31,5 @@ $_SESSION["med_name"] = $med_name;
  } else {
    echo "Error: " . $query . "<br>" . $link->error;
  }
-
-
 }
  ?>

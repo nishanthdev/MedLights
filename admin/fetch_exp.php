@@ -1,14 +1,8 @@
 <?php
 $connect = mysqli_connect("localhost", "root", "", "ogp");
 $output = '';
-if(isset($_POST["query"]))
-{
-	$search = mysqli_real_escape_string($connect, $_POST["query"]);
-	$query = "SELECT * FROM medicine WHERE med_name LIKE '%".$search."%' OR brand LIKE '%".$search."%' OR type LIKE '%".$search."%'";
-} else
-{
-	$query = "SELECT * FROM medicine ORDER BY med_id asc";
-}
+
+	$query = "SELECT * FROM medicine where exp_date <= now() ORDER BY med_id asc";
 $result = mysqli_query($connect, $query);
 if(mysqli_num_rows($result) > 0)
 {

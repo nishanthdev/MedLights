@@ -7,7 +7,6 @@ if (isset($_POST['submit'])) {
     $price = $_POST['price'];
     $date = $_POST['purch_date'];
     $quantity = $_POST['quantity'];
-    // $med_id = 0;
     $med_id = "";
     $query = "SELECT `med_id`,`quantity` FROM `medicine` WHERE `med_name`='$med_name'" ;
     $result = $link->query($query);

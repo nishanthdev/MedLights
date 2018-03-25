@@ -19,20 +19,15 @@ include './database/DB.php';
 </head>
 <body>
 	<?php include 'head.php'; ?>
-	<?php #--------------------------------------------------------------------------------------------------------------------------
-// $bill_num = $_SESSION['bill_num'];
-$bill_num = 10001;
-// echo "$bill_num";
+	<?php 
+$bill_num = $_SESSION['bill_num'];
 foreach($_SESSION['cart'] as $med_id => $quantity) {
-// echo " med_id: $med_id <br>";
-// echo "quantity: $quantity<br>";
 $sql = "SELECT med_name,med_desc,price,quantity FROM medicine WHERE med_id = $med_id";
 $result = $link->query($sql);
 $cost ="";
 $qty = "";
 while($row = mysqli_fetch_row($result)) {
  $cost = $row['2'] * $quantity;
- // echo "cost: $cost";
  $qty = $row['3'];
  $qty = $qty-$quantity;
 }
@@ -44,127 +39,111 @@ $sales_id = $row['0'];
 }
 $sql = "INSERT INTO `sales_desc`(`sales_id`, `med_id`, `quantity`, `price`) VALUES ('$sales_id','$med_id','$quantity','$cost')";
 $result1 = $link->query($sql);
-
-
 $add = "UPDATE `medicine` SET quantity=$qty where med_id=$med_id";
 $result2 = $link->query($add);
-
 }
  ?>
-<div class="jumbotron">
-<h1 class="text-center display-4">Purchase Successful...!</h1>
+<div class="jumbotron" style="background-color: white;">
+<h1 class="text-center display-3">Purchase Successful...!</h1>
 </div>
-<footer id="footer" class="footer color-bg">
-  <div class="footer-bottom">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <div class="module-heading">
-            <h4 class="module-title">Contact Us</h4>
-          </div>
-          <!-- /.module-heading -->
-          
-          <div class="module-body">
-            <ul class="toggle-footer" style="">
-              <li class="media">
-                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-map-marker fa-stack-1x fa-inverse"></i> </span> </div>
-                <div class="media-body">
-                  <p>Example address</p>
-                </div>
-              </li>
-              <li class="media">
-                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-mobile fa-stack-1x fa-inverse"></i> </span> </div>
-                <div class="media-body">
-                  <p>+(888) 123-4567<br>
-                    +(888) 456-7890</p>
-                </div>
-              </li>
-              <li class="media">
-                <div class="pull-left"> <span class="icon fa-stack fa-lg"> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i> </span> </div>
-                <div class="media-body"> <span><a href="#">medlights@themesground.com</a></span> </div>
-              </li>
-            </ul>
-          </div>
-          <!-- /.module-body --> 
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+        <div class="invoice-title">
+          <h2>MediLights Invoice</h2><h3 class="pull-right">Order bill no. # <?php echo $bill_num; ?></h3>
         </div>
-        <!-- /.col -->
-        
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <div class="module-heading">
-            <h4 class="module-title">Customer Service</h4>
+        <hr>
+        <div class="row">
+          <div class="col-xs-6">
+            <address>
+              <?php   
+              $a = "SELECT address,email,name from user where user_id='.$id.'";
+              $res = $link->query($a);
+              while ($row=mysqli_fetch_assoc($res)) {
+               ?>
+            <strong>Billed To:</strong><br>
+            <strong><?php echo $row["name"]; ?></strong><br>
+              <?php echo $row["address"]; ?>
+              <?php } ?>
+            </address>
           </div>
-          <!-- /.module-heading -->
-          
-          <div class="module-body">
-            <ul class='list-unstyled'>
-              <li class="first"><a href="#" title="Contact us">My Account</a></li>
-              <li><a href="#" title="About us">Order History</a></li>
-              <li><a href="#" title="faq">FAQ</a></li>
-              <li><a href="#" title="Popular Searches">Specials</a></li>
-              <li class="last"><a href="#" title="Where is my order?">Help Center</a></li>
-            </ul>
-          </div>
-          <!-- /.module-body --> 
         </div>
-        <!-- /.col -->
-        
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <div class="module-heading">
-            <h4 class="module-title">Corporation</h4>
-          </div>
-          <!-- /.module-heading -->
+        <div class="row">
           
-          <div class="module-body">
-            <ul class='list-unstyled'>
-              <li class="first"><a title="Your Account" href="#">About us</a></li>
-              <li><a title="Information" href="#">Customer Service</a></li>
-              <li><a title="Addresses" href="#">Company</a></li>
-              <li><a title="Addresses" href="#">Investor Relations</a></li>
-              <li class="last"><a title="Orders History" href="#">Advanced Search</a></li>
-            </ul>
+          <div class="col-xs-6">
+            <address>
+              <strong>Order Date:</strong><br>
+             <?php echo date("d-M-Y"); ?><br><br>
+            </address>
           </div>
-          <!-- /.module-body --> 
-        </div>
-        <!-- /.col -->
-        
-        <div class="col-xs-12 col-sm-6 col-md-3">
-          <div class="module-heading">
-            <h4 class="module-title">Why Choose Us</h4>
-          </div>
-          <!-- /.module-heading -->
-          
-          <div class="module-body">
-            <ul class='list-unstyled'>
-              <li class="first"><a href="#" title="About us">Shopping Guide</a></li>
-              <li><a href="#" title="Blog">Blog</a></li>
-              <li><a href="#" title="Company">Company</a></li>
-              <li><a href="#" title="Investor Relations">Investor Relations</a></li>
-              <li class=" last"><a href="contact-us.html" title="Suppliers">Contact Us</a></li>
-            </ul>
-          </div>
-          <!-- /.module-body --> 
         </div>
       </div>
     </div>
-  </div>
-  <div class="copyright-bar">
-    <div class="container">
+    
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><strong>Order summary</strong></h3>
+          </div>
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-condensed">
+                <thead>
+                                <tr>
+                      <td><strong>Item</strong></td>
+                      <td class="text-center"><strong>Price</strong></td>
+                      <td class="text-center"><strong>Quantity</strong></td>
+                      <td class="text-right"><strong>Totals</strong></td>
+                                </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                  if(isset($_SESSION["cart"])) {
 
-      <div class="col-xs-12 col-sm-6 no-padding">
-        <div class="clearfix payment-methods">
-          <ul>
-            <li><img src="assets/images/payments/1.png" alt=""></li>
-            <li><img src="assets/images/payments/2.png" alt=""></li>
-            <li><img src="assets/images/payments/3.png" alt=""></li>
-            <li><img src="assets/images/payments/4.png" alt=""></li>
-            <li><img src="assets/images/payments/5.png" alt=""></li>
-          </ul>
+            $total = 0;
+            foreach($_SESSION["cart"] as $med_id => $quantity) {
+              $sql = "SELECT med_name,med_desc,price,quantity FROM medicine WHERE med_id = $med_id";
+            $result = $link->query($sql);
+
+              while($row = mysqli_fetch_assoc($result)) {
+                $cost = $row["price"] * $quantity;
+                $total = $total + $cost; ?>
+                  <tr>
+                    <td><?php echo $row["med_name"]; ?></td>
+                    <td class="text-center"><?php echo "Rs.".$row["price"]; ?></td>
+                    <td class="text-center"><?php echo $quantity; ?></td>
+                    <td class="text-right"><?php echo "Rs.". $cost; ?></td>
+                  </tr>
+                  <?php }
+                  }
+                }
+                   ?>
+                  <tr>
+                    <td class="no-line"></td>
+                    <td class="no-line"></td>
+                    <td class="no-line text-center"><strong>Shipping</strong></td>
+                    <td class="no-line text-right">Free Delivery</td>
+                  </tr>
+                  <tr>
+                    <td class="no-line"></td>
+                    <td class="no-line"></td>
+                    <td class="no-line text-center"><strong>Total</strong></td>
+                    <td class="no-line text-right"><?php echo "Rs.".$total; ?></td>
+                  </tr>
+                </tbody>
+              </table>
+              <hr>
+              <a href="products.php?action=empty" class="btn btn-primary btn-block">Continue shopping</a>
+            </div>
+          </div>
         </div>
-        <!-- /.payment-methods --> 
       </div>
     </div>
-  </div>
-</footer>
+</div>
+</div>
+<?php include 'footer.php'; ?>
 </body>
 <script src="assets/js/jquery-1.11.1.min.js"></script> 
 <script src="assets/js/bootstrap.min.js"></script> 

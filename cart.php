@@ -6,7 +6,6 @@ $med_id = $_GET['id'];
 $action = $_GET['action'];
 
 if($action === 'empty') {
-  // unset($_SESSION['cart']);
   $_SESSION["cart"] = null;
 }
 $sql = "SELECT quantity FROM medicine WHERE med_id =$med_id";

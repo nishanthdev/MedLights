@@ -6,7 +6,6 @@ if(!isset($_SESSION["state"]))
   header('Location:../login.php');
 } else {
   if ($_SESSION['type']=='admin') {
-    echo "logged in";
   } else {
     echo "<script>alert('You are not admin'); window.location='../login.php';</script>";
   }
@@ -23,8 +22,7 @@ $result = $link->query($query);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Area | Category</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
@@ -33,14 +31,10 @@ $result = $link->query($query);
     <header id="header">
       <div class="container-fluid">
         <div class="row">
-          <!-- <div class="col-md-10"> -->
             <h1 class="text-center display-4">Category</h1>
-          <!-- </div> -->
-
         </div>
       </div>
     </header>
-
     <section id="breadcrumb">
       <div class="container">
         <ol class="breadcrumb">
@@ -50,7 +44,6 @@ $result = $link->query($query);
         </ol>
       </div>
     </section>
-
     <section id="main">
       <div class="container-fluid">
         <div class="row">
@@ -69,10 +62,8 @@ $result = $link->query($query);
               <a href="purchase.php" class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Purchase </a>
               <a href="report.php" class="list-group-item"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Reports </a>
             </div>
-
           </div>
           <div class="col-md-10">
-            <!-- Alerts -->
             <?php
               if (isset($_GET['action'])) {
                 if ($_GET['action']=='deleted') {
@@ -92,20 +83,18 @@ $result = $link->query($query);
               }
             }
              ?>
-             <!--/ aletrs -->
-
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
                 <h3 class="panel-title">Category</h3>
               </div>
               <div class="panel-body">
-                <form class="form-group" action="cat_editprs.php" method="post">
+                <form class="form-group" id="form" action="cat_editprs.php" method="post">
                   <?php while($row = mysqli_fetch_row($result))
                   { ?>
                     <label for="cat_name">Name:</label>
-                    <input type="text" value="<?php echo $row['1']; ?>" name="cat_name" class="form-control"> <br>
+                    <input type="text" value="<?php echo $row['1']; ?>" name="cat_name" class="form-control" data-validation="custom" data-validation-regexp="^([a-zA-Z]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid name"> <br>
                     <label for="cat_desc">Description:</label>
-                    <textarea name="cat_desc" rows="5" cols="90" class="form-control"><?php echo $row['2']; ?></textarea>
+                    <textarea name="cat_desc" rows="5" cols="90" class="form-control" data-validation="custom" data-validation-regexp="^([a-zA-Z0-9 ]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid description"><?php echo $row['2']; ?></textarea>
                     <input type="hidden" name="id" value="<?php echo $row['0']; ?>">
                     <hr>
                     <input type="submit" name="submit" value="Add" class="btn btn-primary">
@@ -126,6 +115,14 @@ $result = $link->query($query);
       <p>Copyright OGP &copy; 2018</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+ <script src="./js/jquery-1.11.1.min.js"></script>
+  <script src="./js/jquery.form-validator.min.js"></script>
+  </body>
+   <script type="text/javascript">
+   $.validate({
+    form : '#form'
+  });
+  </script>
   </body>
 </html>

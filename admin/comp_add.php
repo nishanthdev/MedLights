@@ -16,14 +16,11 @@ if(!isset($_SESSION["state"]))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Area | composition</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-
     <nav class="navbar navbar-default">
-      <!-- <div class="container"> -->
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -54,21 +51,15 @@ if(!isset($_SESSION["state"]))
             <li><a href="#">Welcome, Brad</a></li>
             <li><a href="login.html">Logout</a></li>
           </ul>
-        </div><!--/.nav-collapse -->
-      <!-- </div> -->
+        </div>
     </nav>
-
     <header id="header">
       <div class="container-fluid">
         <div class="row">
-          <!-- <div class="col-md-10"> -->
             <h1 class="text-center display-4">composition</h1>
-          <!-- </div> -->
-
         </div>
       </div>
     </header>
-
     <section id="breadcrumb">
       <div class="container-fluid">
         <ol class="breadcrumb">
@@ -78,7 +69,6 @@ if(!isset($_SESSION["state"]))
         </ol>
       </div>
     </section>
-
     <section id="main">
       <div class="container-fluid">
         <div class="row">
@@ -97,29 +87,25 @@ if(!isset($_SESSION["state"]))
               <a href="purchase.php" class="list-group-item"><span class="glyphicon glyphicon-book" aria-hidden="true"></span> Purchase </a>
               <a href="report.php" class="list-group-item"><span class="glyphicon glyphicon-check" aria-hidden="true"></span> Reports </a>
             </div>
-
           </div>
           <div class="col-md-10">
-
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
                 <h3 class="panel-title">Add compositions</h3>
               </div>
               <div class="panel-body">
-                <form class="form-group" action="comp_addprs.php" method="post">
+                <form class="form-group" id="form" action="comp_addprs.php" method="post">
                   <div class="container">
                       <label for="comp_name">Name:</label>
-                      <input type="text" name="comp_name" class="form-control">
+                      <input type="text" name="comp_name" class="form-control" data-validation="custom" data-validation-regexp="^([a-zA-Z _]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid name">
                       <label for="comp">Description:</label>
-                      <textarea name="comp_desc" rows="5" cols="90"class="form-control"></textarea>
+                      <textarea name="comp_desc" rows="5" cols="90" class="form-control" data-validation="custom" data-validation-regexp="^([a-zA-Z0-9 _]+)$" data-validation-allowing=" " data-validation-error-msg="Please enter a valid description"></textarea>
             <hr>
                   <input type="submit" name="submit" value="Add" class="btn btn-primary">
                   </div>
                 </form>
               </div>
               </div>
-
-              <!--  -->
                 </div>
               </div>
           </div>
@@ -131,6 +117,14 @@ if(!isset($_SESSION["state"]))
       <p>Copyright OGP &copy; 2018</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="./js/jquery-1.11.1.min.js"></script>
+  <script src="./js/jquery.form-validator.min.js"></script>
+  </body>
+   <script type="text/javascript">
+   $.validate({
+    form : '#form'
+  });
+  </script>
   </body>
 </html>

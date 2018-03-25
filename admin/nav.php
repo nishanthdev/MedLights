@@ -1,5 +1,4 @@
 <nav class="navbar navbar-default">
-  <!-- <div class="container"> -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
@@ -32,14 +31,8 @@
              Welcome, Admin <span class="caret"></span>
            </a>
        <ul class="dropdown-menu">
-                   <li><a href="profile.php">Profile</a></li>
                    <li><a href="../logout.php">Logout</a></li>
-                   <!-- <li><a href="cat_home.php">Category</a></li> -->
-                 </ul>
              </li>
-        <!-- <li><a href="../login.php">Logout</a></li> -->
       </ul>
     </div>
-    <!--/.nav-collapse -->
-  <!-- </div> -->
 </nav>

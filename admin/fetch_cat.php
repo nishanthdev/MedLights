@@ -30,7 +30,7 @@ if(mysqli_num_rows($result) > 0)
 				<td>'.$row["cat_name"].'</td>
 				<td>'.$row["cat_desc"].'</td>
 				<td><a href="cat_edit.php?id='.$row["cat_id"].'" class="btn btn-success">Edit</a></td>
-				<td><a href="cat_delete.php?id='.$row["cat_id"].'" class="btn btn-danger">Delete</a></td>
+				<td><a href="cat_deleteprs.php?id='.$row["cat_id"].'" class="btn btn-danger">Delete</a></td>
 			</tr>
 		';
 	}

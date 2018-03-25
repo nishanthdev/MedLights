@@ -1,5 +1,4 @@
 <?php
-// $name = 0, $gender=0, $address=0, $email=0, $phone=0, $place=0;
 include("./database/DB.php");
 if(isset($_POST['submit'])) {
 	$name = $_POST['name'];
@@ -8,17 +7,12 @@ if(isset($_POST['submit'])) {
 	$email = $_POST['email'];
 	$number = $_POST['pnumber'];
 	$username = $_POST['username'];
-
-	 //Email is retrieved from the textbox
-$sql = "SELECT email FROM user WHERE email ='$email' "; //checks if the email exists in db
+$sql = "SELECT email FROM user WHERE email ='$email' "; 
 $select = $link->query($sql);
-$count = $select->num_rows; //counts the selected rows
-
-		if ($count != 0) {  //if the counts is not zero the email exists
-		// echo "Email already exists";
+$count = $select->num_rows; 
+		if ($count != 0) {
 		header('Location:index.php');
 	} else {
-		// echo "email availible";
 		$password = $_POST['password'];
 		$cpassword = $_POST['cpassword'];
 
@@ -27,7 +21,7 @@ $count = $select->num_rows; //counts the selected rows
 	$query="Insert into user(name,gender,address,phone,username,email, password,type) values('$name', '$gender', '$address', '$number', '$username', '$email', '$password', 'regular')";
 	if ($result=$link->query($query) === TRUE) {
     echo "New record created successfully";
-		// header('Location:login.php');
+		header('Location:login.php?action=success');
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
  }
@@ -36,7 +30,7 @@ $count = $select->num_rows; //counts the selected rows
 }
 	}
 } else{
-	header('Location:reg_user.php');
+	header('Location:login.php?action=error1');
 }
 
 

@@ -17,25 +17,18 @@ $result = $link->query($query);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Admin Area | User</title>
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
   </head>
   <body>
-
     <?php include 'nav.php'; ?>
-
     <header id="header">
       <div class="container-fluid">
         <div class="row">
-          <!-- <div class="col-md-10"> -->
             <h1 class="text-center display-4">User</h1>
-          <!-- </div> -->
-
         </div>
       </div>
     </header>
-
     <section id="breadcrumb">
       <div class="container-fluid">
         <ol class="breadcrumb">
@@ -44,7 +37,6 @@ $result = $link->query($query);
         </ol>
       </div>
     </section>
-
     <section id="main">
       <div class="container-fluid">
         <div class="row">
@@ -66,7 +58,6 @@ $result = $link->query($query);
 
           </div>
           <div class="col-md-10">
-  <!-- Alerts -->
             <?php
               if (isset($_GET['action'])) {
                 if ($_GET['action']=='deleted') {
@@ -86,7 +77,6 @@ $result = $link->query($query);
               }
             }
              ?>
-             <!--/ aletrs -->
             <div class="panel panel-default">
               <div class="panel-heading main-color-bg">
                 <h3 class="panel-title">Users</h3>
@@ -98,8 +88,6 @@ $result = $link->query($query);
          <div id="result"></div>
               </div>
               </div>
-
-              <!--  -->
                 </div>
               </div>
           </div>
@@ -111,7 +99,7 @@ $result = $link->query($query);
       <p>Copyright OGP &copy; 2018</p>
     </footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
         <script>
 $(document).ready(function(){
   load_data();
@@ -127,7 +115,6 @@ $(document).ready(function(){
       }
     });
   }
-  
   $('#search_text').keyup(function(){
     var search = $(this).val();
     if(search != '')

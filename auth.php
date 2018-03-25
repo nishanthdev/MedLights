@@ -1,8 +1,3 @@
-<?php
-include './api/header.php';
-
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -11,12 +6,13 @@ include './api/header.php';
   <body>
     <div class="jumbotron">
       <h1 class="display-3 text-center">Authenticate</h1>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     </div>
     <div class="container">
       <div class="card">
         <div class="card-body">
           <form class="form-control" action="auth_prs.php" method="post">
-              <label for="Email">EMail:</label>
+              <label for="Email">Email:</label>
               <input type="email" name="email" class="form-control">
               <hr>
               <input type="submit" class="btn btn-primary" name="submit" value="Confirm">
