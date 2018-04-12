@@ -110,7 +110,7 @@
       </div>
         <div class="form-group">
         <label class="info-title" for="exampleInputEmail1">Phone Number <span>*</span></label>
-        <input type="text" class="form-control unicase-form-control text-input" name="pnumber" data-validation="number" data-validation-error-msg="Please enter a valid phone number." required>
+        <input type="text" class="form-control unicase-form-control text-input" name="pnumber" data-validation="number length" data-validation-length="min10" data-validation-error-msg="Please enter a valid phone number." required>
     </div>
         <div class="form-group">
         <label class="info-title" for="exampleInputEmail1">Password <span>*</span></label>

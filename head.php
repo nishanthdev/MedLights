@@ -146,7 +146,8 @@ $(document).ready(function(){
                     <div class="col-xs-1 action">
                       <hr>
                     </div>
-                    <hr>
+                    + 
+                    
                   <?php  }
                     }
                     ?>

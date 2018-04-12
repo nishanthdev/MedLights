@@ -77,7 +77,7 @@
 				 ?>
 				<tr>
 					<td class="cart-image">
-						<a class="entry-thumbnail" href="detail.html">
+						<a class="entry-thumbnail" href="detail.php?id=<?php echo $row[4]; ?>">
 						    <img src="./admin/meds/<?php echo $row['6']; ?>" alt="">
 						</a>
 					</td>

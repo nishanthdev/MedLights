@@ -76,11 +76,11 @@ $result = $link->query($query);
                   <div class="row">
                     <div class="col-md-6 mb-3">
                       <label for="man_date">Manufatured date:</label>
-                      <input type="date" name="m_date" class="form-control" data-validation="date">
+                      <input type="date" name="m_date" class="form-control" data-validation="date" max="2018-02-01" min="2014-01-01">
                     </div>
                     <div class="col-md-6 mb-3">
                       <label for="man_date">Expire date:</label>
-                      <input type="date" name="e_date" class="form-control" data-validation="date">
+                      <input type="date" name="e_date" class="form-control" data-validation="date" min="2018-7-01" max="2025-12-01">
                     </div>
                   </div>
                   <div class="row">
